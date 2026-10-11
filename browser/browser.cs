@@ -147,7 +147,7 @@ public class MyProgram {
             //post game or background things not related to movement (such as drawing animations)
             
                 //run at around 60 fps
-                Thread.Sleep(17);
+                Thread.Sleep(16);
                 }
             }
 
