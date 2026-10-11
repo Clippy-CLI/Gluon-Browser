@@ -1,3 +1,4 @@
+//Gluon Browser by Clippy-CLI (Github)
 using SixLabors.ImageSharp;
 using System.IO;
 using SixLabors.ImageSharp.Processing;
