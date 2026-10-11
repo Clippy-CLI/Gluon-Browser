@@ -11,10 +11,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
-public class MyProgram
-{
-    public static async Task Main(string[] args)
-{
+public class MyProgram {
+    public static async Task Main(string[] args) {
         Console.Clear();
         Console.WriteLine("    #######    ");
         Console.WriteLine("  ##       ##  ");
@@ -30,24 +28,20 @@ public class MyProgram
         Console.WriteLine();
         string storeInput = ("");
         List<String> tabArray = new List<String>();
-        while (true)
-{
+        while (true) {
             Console.Write(">");
             string input = Console.ReadLine();
             bool handled = false;
 
-            if (input == null || input.Equals("exit", StringComparison.OrdinalIgnoreCase))
-{
+            if (input == null || input.Equals("exit", StringComparison.OrdinalIgnoreCase)) {
                 break;
             }
 
-            if (input.Equals("previous"))
-{
+            if (input.Equals("previous")) {
                 input = storeInput;
             }
 
-            if (input.Equals("common"))
-{
+            if (input.Equals("common")) {
                 handled = true;
                 //prints some common webpages
                 Console.WriteLine("Common Webpages:");
@@ -59,101 +53,81 @@ public class MyProgram
                 Console.WriteLine("");
             }
 
-            if (input.StartsWith("linkscan", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.StartsWith("linkscan", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                try
-{
+                try {
                     string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
                     var getter = new GetLinks(urlPart, "");
                     string result = await getter.GetLinksFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result))
-{
+                    if (string.IsNullOrWhiteSpace(result)) {
                         Console.WriteLine("no links found");
                     }
-                    else
-{
+                    else {
                         Console.WriteLine(result);
                     }
                 }
-                catch (Exception e)
-{
+                catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
-            if (input.StartsWith("images", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.StartsWith("images", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                try
-{
+                try {
                     string urlPart = input.Length > 7 ? input.Substring(7).Trim() : string.Empty;
                     var getter = new GetImageLinks(urlPart, "");
                     string result = await getter.GetImageLinksFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result))
-{
+                    if (string.IsNullOrWhiteSpace(result)) {
                         Console.WriteLine("no images found");
                     }
-                    else
-{
+                    else {
                         Console.WriteLine(result);
                     }
                 }
-                catch (Exception e)
-{
+                catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
 
-            if (input.StartsWith("image", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.StartsWith("image", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                try
-{
+                try {
                     string urlPart = input.Length > 6 ? input.Substring(6).Trim() : string.Empty;
                     var getter = new GetImage(urlPart, "");
                     string result = await getter.GetImageFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result))
-{
+                    if (string.IsNullOrWhiteSpace(result)) {
                         Console.WriteLine("no images found");
                     }
-                    else
-{
+                    else {
                     }
                 }
-                catch (Exception e)
-{
+                catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
 
-            if (input.Equals("tab", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.Equals("tab", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 Console.WriteLine(storeInput + "added as a tab");
                 tabArray.Add(storeInput);
             }
 
-            if (input.Equals("tabs", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.Equals("tabs", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 Console.WriteLine("Open Tabs:");
-                for (int i = 0; i < tabArray.Count; i++)
-{
+                for (int i = 0; i < tabArray.Count; i++) {
                     Console.WriteLine(tabArray[i]);
                 }
             }
 
-            if (input.Equals("clear", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.Equals("clear", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 Console.Clear();
             }
 
-            if (input.Equals("game", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 //start a game, all handled right here
                 Console.WriteLine("Game starting...");
@@ -201,19 +175,15 @@ public class MyProgram
                 //idk if we need
 
 
-                while (onTitle)
-{
+                while (onTitle) {
                     string menuOption = Console.ReadLine();
 
-                    if (int.TryParse(menuOption, out int selectedOption))
-{
-                        if (selectedOption == 1)
-{
+                    if (int.TryParse(menuOption, out int selectedOption)) {
+                        if (selectedOption == 1) {
                             Console.WriteLine("New game starting...");
                             onTitle = false;
                         }
-                        else if (selectedOption == 2)
-{
+                        else if (selectedOption == 2) {
                             Console.WriteLine("Please enter a code (type cancel to launch new game)");
                             //so in here we are just going to like add a code parser and then re-assign all int
                             //values from above with ones from here
@@ -226,21 +196,18 @@ public class MyProgram
 
 
                         }
-                        else
-{
+                        else {
                             Console.WriteLine("Please enter a valid option");
                         }
                     }
-                    else
-{
+                    else {
                         Console.WriteLine("Please enter a valid option");
                     }
 
                 }
 
                 Boolean isPlayingGame = true;
-                while (isPlayingGame)
-{
+                while (isPlayingGame) {
                     //note to add a console.Clear(); after every turn/option so that it looks clean
                     //as well as a limit on certain items because if the ints get too big then uh oh
 
@@ -294,50 +261,41 @@ public class MyProgram
 
             }
 
-            if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                try
-{
+                try {
                     string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
                     var getter = new GetData(urlPart, "");
                     string result = await getter.GetDataFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result))
-{
+                    if (string.IsNullOrWhiteSpace(result)) {
                         Console.WriteLine("no links found");
                     }
-                    else
-{
+                    else {
                         File.WriteAllText("savedSite.txt", result);
                         Console.WriteLine("Page saved as savedSite.txt");
                     }
                 }
-                catch (Exception e)
-{
+                catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
 
-            if (input.StartsWith("readfile", StringComparison.OrdinalIgnoreCase))
-{
+            if (input.StartsWith("readfile", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 string filePath = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
-                try
-{
+                try {
                     string fileText = File.ReadAllText(filePath);
                     Console.WriteLine(fileText);
                     Console.WriteLine("File contents displayed successfully");
                 }
-                catch (IOException e)
-{
-                    Console.WriteLine($"An error occurred while reading the file: {e.Message}");
+                catch (IOException e) {
+                    Console.WriteLine($"An error occurred while reading the file:  {e.Message}");
                 }
 
             }
 
-            if (input.Equals("help"))
-{
+            if (input.Equals("help")) {
                 handled = true;
                 Console.WriteLine("exit - Closes the program");
                 Console.WriteLine("previous - Runs the previous command/url");
@@ -354,29 +312,23 @@ public class MyProgram
             }
 
             storeInput = (input);
-            if (!handled)
-{
-                try
-{
+            if (!handled) {
+                try {
                     var getter = new GetData(input, "");
                     string result = await getter.GetDataFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result))
-{
+                    if (string.IsNullOrWhiteSpace(result)) {
                         Console.WriteLine("(no readable <p> content found)");
                     }
-                    else
-{
+                    else {
                         var lines = Regex.Split(result, "\r?\n");
-                        foreach (var line in lines)
-{
+                        foreach (var line in lines) {
                             var t = line.Trim();
                             if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
                         }
                     }
                 }
-                catch (Exception e)
-{
+                catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
@@ -386,23 +338,19 @@ public class MyProgram
     }
 }
 
-public class GetData
-{
+public class GetData {
     private readonly string chooseURL;
     private readonly string recievePart;
 
-    public GetData(string pickURL, string parameter)
-{
+    public GetData(string pickURL, string parameter) {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
-    public async Task<string> GetDataFromSiteAsync()
-{
+    public async Task<string> GetDataFromSiteAsync() {
         string recievedData = string.Empty;
 
-        try
-{
+        try {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
@@ -412,43 +360,35 @@ public class GetData
             var response = await client.GetAsync(chooseURL);
             recievedData = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
-{
-                if ((int)response.StatusCode == 403)
-{
+            if (!response.IsSuccessStatusCode) {
+                if ((int)response.StatusCode == 403) {
                     return "Http 403, request rejected (Error Detected as bot/blocked traffic";
                 }
 
-                if (string.IsNullOrEmpty(recievedData))
-{
+                if (string.IsNullOrEmpty(recievedData)) {
                     return "Error loading website (Error No Content Recieved From Site)";
                 }
 
                 return "An error has occured, check the URL and try again (Error Site not found";
             }
         }
-        catch (Exception e)
-{
+        catch (Exception e) {
             Console.WriteLine("Looks bad: " + e);
             var eString = e.ToString();
-            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1)
-{
+            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1) {
                 return "Http 403, request rejected (Error Code: yg7f63g)";
             }
-            else if (string.IsNullOrEmpty(recievedData))
-{
+            else if (string.IsNullOrEmpty(recievedData)) {
                 return "Error loading website (Error Code: d3y7g3)";
             }
-            else
-{
+            else {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
         var recievedNew = new StringBuilder();
         string work = recievedData;
 
-        while (true)
-{
+        while (true) {
             int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
 
@@ -458,8 +398,7 @@ public class GetData
 
             work = work.Substring(gt + 1);
             int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
-            if (endP == -1)
-{
+            if (endP == -1) {
                 recievedNew.Append(work);
                 break;
             }
@@ -477,16 +416,13 @@ public class GetData
         // remove any remaining tags
         var sb = new StringBuilder();
         bool inTag = false;
-        for (int i = 0; i < cleaned.Length; i++)
-{
+        for (int i = 0; i < cleaned.Length; i++) {
             char c = cleaned[i];
-            if (!inTag)
-{
-                if (c == '<') { inTag = true; if (sb.Length > 0 && !char.IsWhiteSpace(sb[sb.Length - 1])) sb.Append(' '); }
+            if (!inTag) {
+                if (c == '<')  { inTag = true; if (sb.Length > 0 && !char.IsWhiteSpace(sb[sb.Length - 1])) sb.Append(' '); }
                 else sb.Append(c);
             }
-            else
-{
+            else {
                 if (c == '>') inTag = false;
             }
         }
@@ -499,24 +435,20 @@ public class GetData
     }
 }
 
-public class GetLinks
-{
+public class GetLinks {
     private readonly string chooseURL;
     private readonly string recievePart;
     List<String> linkArray = new List<String>();
 
-    public GetLinks(string pickURL, string parameter)
-{
+    public GetLinks(string pickURL, string parameter) {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
-    public async Task<string> GetLinksFromSiteAsync()
-{
+    public async Task<string> GetLinksFromSiteAsync() {
         string recievedData = string.Empty;
 
-        try
-{
+        try {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
@@ -527,43 +459,35 @@ public class GetLinks
             // read as string even if not successful so we can inspect
             recievedData = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
-{
-                if ((int)response.StatusCode == 403)
-{
+            if (!response.IsSuccessStatusCode) {
+                if ((int)response.StatusCode == 403) {
                     return "Http 403, request rejected (Error Detected as bot/blocked traffic";
                 }
 
-                if (string.IsNullOrEmpty(recievedData))
-{
+                if (string.IsNullOrEmpty(recievedData)) {
                     return "Error loading website (Error No Content Recieved From Site)";
                 }
 
                 return "An error has occured, check the URL and try again (Error Site not found";
             }
         }
-        catch (Exception e)
-{
+        catch (Exception e) {
             Console.WriteLine("Looks bad: " + e);
             var eString = e.ToString();
-            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1)
-{
+            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1) {
                 return "Http 403, request rejected (Error Code: yg7f63g)";
             }
-            else if (string.IsNullOrEmpty(recievedData))
-{
+            else if (string.IsNullOrEmpty(recievedData)) {
                 return "Error loading website (Error Code: d3y7g3)";
             }
-            else
-{
+            else {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
         var recievedNew = new StringBuilder();
         string work = recievedData;
 
-        while (true)
-{
+        while (true) {
 
             int start = work.IndexOf("href", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
@@ -579,8 +503,7 @@ public class GetLinks
 
             //now down here there is only one '"' which is the end of the link
             int endP = work.IndexOf('"');
-            if (endP == -1)
-{
+            if (endP == -1) {
                 // take remainder
                 break;
             }
@@ -592,8 +515,7 @@ public class GetLinks
         }
 
         var decodedSb = new StringBuilder();
-        for (int indexCount = 0; indexCount < linkArray.Count; indexCount++)
-{
+        for (int indexCount = 0; indexCount < linkArray.Count; indexCount++) {
 
             decodedSb.Append(linkArray[indexCount]);
 
@@ -606,25 +528,21 @@ public class GetLinks
 }
 
 
-public class GetImageLinks
-{
+public class GetImageLinks {
     private readonly string chooseURL;
     private readonly string recievePart;
 
     List<String> linkArray = new List<String>();
 
-    public GetImageLinks(string pickURL, string parameter)
-{
+    public GetImageLinks(string pickURL, string parameter) {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
-    public async Task<string> GetImageLinksFromSiteAsync()
-{
+    public async Task<string> GetImageLinksFromSiteAsync() {
         string recievedData = ("");
 
-        try
-{
+        try {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
@@ -634,35 +552,28 @@ public class GetImageLinks
             var response = await client.GetAsync(chooseURL);
             recievedData = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
-{
-                if ((int)response.StatusCode == 403)
-{
+            if (!response.IsSuccessStatusCode) {
+                if ((int)response.StatusCode == 403) {
                     return "Http 403, request rejected (Error Detected as bot/blocked traffic";
                 }
 
-                if (string.IsNullOrEmpty(recievedData))
-{
+                if (string.IsNullOrEmpty(recievedData)) {
                     return "Error loading website (Error No Content Recieved From Site)";
                 }
 
                 return "An error has occured, check the URL and try again (Error Site not found";
             }
         }
-        catch (Exception e)
-{
+        catch (Exception e) {
             Console.WriteLine("Looks bad: " + e);
             var eString = e.ToString();
-            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1)
-{
+            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1) {
                 return "Http 403, request rejected (Error Code: yg7f63g)";
             }
-            else if (string.IsNullOrEmpty(recievedData))
-{
+            else if (string.IsNullOrEmpty(recievedData)) {
                 return "Error loading website (Error Code: d3y7g3)";
             }
-            else
-{
+            else {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
@@ -670,8 +581,7 @@ public class GetImageLinks
 
         var recievedNew = new StringBuilder();
         string work = recievedData;
-        while (true)
-{
+        while (true) {
 
 
             int start = work.IndexOf("src=", StringComparison.OrdinalIgnoreCase);
@@ -686,8 +596,7 @@ public class GetImageLinks
 
             int endP = work.IndexOf("\"", StringComparison.OrdinalIgnoreCase);
 
-            if (endP == -1)
-{
+            if (endP == -1) {
 
 
                 break;
@@ -702,47 +611,35 @@ public class GetImageLinks
 
             string linkToAddExtension = linkToAdd.Length >= 4 ? linkToAdd.Substring(linkToAdd.Length - 4) : linkToAdd;
             //no idea if that math is even correct to get that extension or not, 4 is lazy way to do .png or jpeg, etc
-            if (linkToAddExtension.Equals(".png"))
-{
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
-{
+            if (linkToAddExtension.Equals(".png")) {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else
-{
+                else {
                     linkArray.Add(linkToAdd);
                 }
             }
-            else if (linkToAddExtension.Equals("jpeg"))
-{
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
-{
+            else if (linkToAddExtension.Equals("jpeg")) {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else
-{
+                else {
                     linkArray.Add(linkToAdd);
                 }
             }
-            else if (linkToAddExtension.Equals(".jpg"))
-{
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
-{
+            else if (linkToAddExtension.Equals(".jpg")) {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else
-{
+                else {
                     linkArray.Add(linkToAdd);
                 }
             }
-            else if (linkToAddExtension.Equals("webp"))
-{
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
-{
+            else if (linkToAddExtension.Equals("webp")) {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else
-{
+                else {
                     linkArray.Add(linkToAdd);
                 }
             }
@@ -750,8 +647,7 @@ public class GetImageLinks
 
 
         string decoded = ("");
-        for (int i = 0; i < linkArray.Count; i++)
-{
+        for (int i = 0; i < linkArray.Count; i++) {
 
             using var imageClient = new HttpClient();
             imageClient.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
@@ -760,12 +656,10 @@ public class GetImageLinks
             imageClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
 
 
-            using (Stream streamImage = await imageClient.GetStreamAsync(linkArray[i]))
-{
-                using (Image image = await Image.LoadAsync(streamImage))
-{
+            using (Stream streamImage = await imageClient.GetStreamAsync(linkArray[i])) {
+                using (Image image = await Image.LoadAsync(streamImage)) {
 
-                    char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+                    char[] AsciiRamp =  { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
 
 
 
@@ -782,14 +676,11 @@ public class GetImageLinks
 
                     var asciiBuilder = new StringBuilder();
 
-                    imageToPrint.ProcessPixelRows(accessor =>
-{
-                        for (int y = 0; y < accessor.Height; y++)
-{
+                    imageToPrint.ProcessPixelRows(accessor => {
+                        for (int y = 0; y < accessor.Height; y++) {
                             Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
 
-                            for (int x = 0; x < pixelRow.Length; x++)
-{
+                            for (int x = 0; x < pixelRow.Length; x++) {
                                 Rgb24 pixel = pixelRow[x];
 
                                 double luminance = (0.2126 * pixel.R) + (0.7152 * pixel.G) + (0.0722 * pixel.B);
@@ -827,35 +718,29 @@ public class GetImageLinks
 
 
 
-public class GetImage
-{
+public class GetImage {
     private readonly string chooseURL;
     private readonly string recievePart;
 
-    public GetImage(string pickURL, string parameter)
-{
+    public GetImage(string pickURL, string parameter) {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
-    public async Task<string> GetImageFromSiteAsync()
-{
-        try
-{
+    public async Task<string> GetImageFromSiteAsync() {
+        try {
             using var imageClient = new HttpClient();
             imageClient.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             imageClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
             imageClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             imageClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            using (Stream streamImage = await imageClient.GetStreamAsync(chooseURL))
-{
-                using (Image image = await Image.LoadAsync(streamImage))
-{
+            using (Stream streamImage = await imageClient.GetStreamAsync(chooseURL)) {
+                using (Image image = await Image.LoadAsync(streamImage)) {
                     String decoded = ("");
 
 
 
-                    char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+                    char[] AsciiRamp =  { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
 
 
 
@@ -872,14 +757,11 @@ public class GetImage
 
                     var asciiBuilder = new StringBuilder();
 
-                    imageToPrint.ProcessPixelRows(accessor =>
-{
-                        for (int y = 0; y < accessor.Height; y++)
-{
+                    imageToPrint.ProcessPixelRows(accessor => {
+                        for (int y = 0; y < accessor.Height; y++) {
                             Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
 
-                            for (int x = 0; x < pixelRow.Length; x++)
-{
+                            for (int x = 0; x < pixelRow.Length; x++) {
                                 Rgb24 pixel = pixelRow[x];
 
 
@@ -905,8 +787,7 @@ public class GetImage
 
 
         }
-        catch
-{
+        catch {
             return ("Umm something happened");
         }
     }
