@@ -189,7 +189,13 @@ public class MyProgram {
                             //values from above with ones from here
                             //will probably just be like int|int|int|int and each int corresponds to its position
                             //in order of being defined up above
-
+                            string passOption = Console.ReadLine();
+                            //we are going to first check for a correct amount of | and that it is all ints
+                            //just do this by formating the string to remove all | while counting that there is a
+                            //correct amount, then the leftover string just check that it is a number not int as 
+                            //int is likely too small. Im not going to add a checker for if you put in impossible
+                            //values to the password thing because if you want to mess around and make weird values
+                            //to play the game with, go ahead
 
 
 
