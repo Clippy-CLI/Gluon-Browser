@@ -131,8 +131,24 @@ public class MyProgram {
             if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 //start a game, all handled right here
-                Console.WriteLine("Game starting...");
+                Console.WriteLine("Game starting... (Press escape to exit)");
+                bool running = true;
 
+        while (running) {
+            //key is pressed
+            if (Console.KeyAvailable) {
+                //in here, define keys and actions
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                
+                if (keyInfo.Key == ConsoleKey.Escape) {
+                    running = false;
+                }
+            }
+            //post game or background things not related to movement (such as drawing animations)
+            
+                //run at around 60 fps
+                Thread.Sleep(17);
+                }
             }
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
