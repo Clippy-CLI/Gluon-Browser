@@ -1,26 +1,3 @@
-//Note that this program was originally made in java and was converted to c# later
-
-//To do: fix bugs clean code
-//improve images maybe
-//other ideas to add: more commands, implementations of normal browser features, idk what else
-//solid actual ideas:
-//readImage, reads an image from a directory and displays it (test with the sharkeatingcable thing)
-//some sort of debug/lower level thing with like, connecting to networks or something? or tor just somehow (idk why)
-//or like, accessing a webserver/txt file from local device
-//random privacy policy/tos thing you can read that just says like "This shouldnt collect data as its not coded"
-//and maybe if SixLabors image library needs a license or something
-
-//rewrite the p tag scanning so we actually get more text and stuff and more sites work
-
-
-
-//replit does work very well for creating a shareable link for people to see! I am very happy about this
-
-//hackclub publishing notes:
-//improve readme/about, as well as you have to link to hackclub/stardance event for it to count
-//advertise the included game, because the game itself is an entire reason to sue the browser
-//even if you dont use any of the browser features
-
 using SixLabors.ImageSharp;
 using System.IO;
 using SixLabors.ImageSharp.Processing;
@@ -32,9 +9,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Linq;
 using System.Text.RegularExpressions;
-
 using System.Collections.Generic;
-//arraylist for c#, currently used for gathering links/images
 
 public class MyProgram {
     public static async Task Main(string[] args) {
@@ -53,14 +28,11 @@ public class MyProgram {
         Console.WriteLine();
         string storeInput = ("");
         List<String> tabArray = new List<String>();
-        //create var to store the input for later
         while (true) {
             Console.Write(">");
             string input = Console.ReadLine();
             bool handled = false;
 
-            //yes the commands are only 1 line and yes I'm still using {} as it looks pretty
-            //also i dont think it needs to be if/else because no two commands should be the same
             if (input == null || input.Equals("exit", StringComparison.OrdinalIgnoreCase)) {
                 break;
             }
@@ -68,8 +40,6 @@ public class MyProgram {
             if (input.Equals("previous")) {
                 input = storeInput;
             }
-
-            //allows you to type previous and bring up previous input
 
             if (input.Equals("common")) {
                 handled = true;
@@ -81,16 +51,11 @@ public class MyProgram {
                 Console.WriteLine("Project Gutenberg (Ebooks): https://www.gutenberg.org/cache/epub/(bookcode)/pg(bookcode)-images.html");
                 Console.WriteLine("Legible news: https://legiblenews.com/");
                 Console.WriteLine("");
-                //add more later, especially when links are available.
-                //ideas: google code styleguides, stock tickers or something, whatever else i can maybe find
-               
             }
 
             if (input.StartsWith("linkscan", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                //essentially, will scan links of the webpage put in after linkscan
                 try {
-                    //substring is 9 as command is linkscan (space) url
                     string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
                     var getter = new GetLinks(urlPart, "");
                     string result = await getter.GetLinksFromSiteAsync();
@@ -99,26 +64,15 @@ public class MyProgram {
                         Console.WriteLine("no links found");
                     }
                     else {
-                        /*var lines = Regex.Split(result, "\r?\n");
-                        foreach (var line in lines) {
-                            var t = line.Trim();
-                            if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
-                        }
-                        do nothing, we dont need to format the links more they are formatted in getLinks
-                        */
-                        // print the raw links output
                         Console.WriteLine(result);
                     }
                 } catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
-            //for now, Im just running images as a command
             if (input.StartsWith("images", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                //uhh idk i copied this from link command
                 try {
-                    //images is 7 as command is linkscan (space) url
                     string urlPart = input.Length > 7 ? input.Substring(7).Trim() : string.Empty;
                     var getter = new GetImageLinks(urlPart, "");
                     string result = await getter.GetImageLinksFromSiteAsync();
@@ -136,9 +90,7 @@ public class MyProgram {
 
             if (input.StartsWith("image", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                //uhh idk i copied this from link command
                 try {
-                    //image is 6 as command is linkscan (space) url
                     string urlPart = input.Length > 6 ? input.Substring(6).Trim() : string.Empty;
                     var getter = new GetImage(urlPart, "");
                     string result = await getter.GetImageFromSiteAsync();
@@ -147,8 +99,6 @@ public class MyProgram {
                         Console.WriteLine("no images found");
                     }
                     else {
-                        //Console.WriteLine(result);
-                        //ok that stopeed it from duplicating
                     }
                 } catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
@@ -159,9 +109,6 @@ public class MyProgram {
                 handled = true;
                 Console.WriteLine(storeInput + "added as a tab");
                 tabArray.Add(storeInput);
-                //maybe add a thing so that you name it whatever you want but i'll add that later
-                //could also just make it simple one string array all even numbers (0,2,4) are the tab names and
-                //odd numbers (1,3,5) are the url
             }
 
             if (input.Equals("tabs", StringComparison.OrdinalIgnoreCase)) {
@@ -170,13 +117,11 @@ public class MyProgram {
                 for (int i = 0; i < tabArray.Count; i++) {
                     Console.WriteLine(tabArray[i]);
                 }
-                //simply print an arraylist 
             }
 
             if (input.Equals("clear", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 Console.Clear();
-                //clears the terminal
             }
 
             if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
@@ -312,9 +257,7 @@ public class MyProgram {
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                //essentially, will scan links of the webpage put in after linkscan
                 try {
-                    //substring is 9 as command is linkscan (space) url
                     string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
                     var getter = new GetData(urlPart, "");
                     string result = await getter.GetDataFromSiteAsync();
@@ -323,20 +266,6 @@ public class MyProgram {
                         Console.WriteLine("no links found");
                     }
                     else {
-                        /*var lines = Regex.Split(result, "\r?\n");
-                        foreach (var line in lines) {
-                            var t = line.Trim();
-                            if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
-                        }
-                        do nothing, we dont need to format the links more they are formatted in getLinks
-                        */
-                        // print the raw links output
-
-                        //string = result
-                        //linkname.txt saves all the data that it has I think here
-
-                        //for now I am calling it savedSite.txt as using like http:// has a lot of characters that 
-                        //cannot be used in filenames
                         File.WriteAllText("savedSite.txt", result);
                         Console.WriteLine("Page saved as savedSite.txt");
                     }
@@ -349,7 +278,6 @@ public class MyProgram {
                 handled = true;
                     string filePath = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
                         try {
-                            // Read the entire file into a string
                             string fileText = File.ReadAllText(filePath);
                             Console.WriteLine(fileText);
                             Console.WriteLine("File contents displayed successfully");
@@ -373,11 +301,7 @@ public class MyProgram {
                 Console.WriteLine("game - a small, fun, offline game");
                 Console.WriteLine("savepage + (url) - saves the page as a text file");
                 Console.WriteLine("readfile + (file) - reads a specified txt file");
-                //remember to update this section with more commands as they are added
             }
-            
-
-            //after here add more commands, or if anything needs to be done before try
 
             storeInput = (input);
             if (!handled) {
@@ -405,7 +329,6 @@ public class MyProgram {
     }
 }
 
-// Port of the Java getData class to C#.
 public class GetData {
     private readonly string chooseURL;
     private readonly string recievePart;
@@ -426,7 +349,6 @@ public class GetData {
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
 
             var response = await client.GetAsync(chooseURL);
-            // read as string even if not successful so we can inspect
             recievedData = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode) {
@@ -453,19 +375,9 @@ public class GetData {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
-
-        // now filter the html into something more readable: extract <p> contents
         var recievedNew = new StringBuilder();
         string work = recievedData;
 
-        /*Removed images design comment, as it as moved to the GetLinks, for some reason idk why
-
-        oh wait, because for now, links and images are just different kinds of links so they would look similar
-
-        Also just a note to self: i did check the original java code, and yes it did only grab anything in <p> tags. the 
-        improvement was that it could grab p tags from anywhere in the html not just the main areas
-
-        */
         while (true) {
             int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
@@ -477,7 +389,6 @@ public class GetData {
             work = work.Substring(gt + 1);
             int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
             if (endP == -1) {
-                // take remainder
                 recievedNew.Append(work);
                 break;
             }
@@ -517,10 +428,7 @@ public class GetData {
 public class GetLinks {
     private readonly string chooseURL;
     private readonly string recievePart;
-    //somewhere in here, we need an array to store the links
     List<String> linkArray = new List<String>();
-    //linkArray.Add("(url)");
-    //should be uppercase
 
     public GetLinks(string pickURL, string parameter) {
         chooseURL = pickURL;
@@ -565,17 +473,11 @@ public class GetLinks {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
-
-        // now filter the html into something more readable: extract <p> contents
         var recievedNew = new StringBuilder();
         string work = recievedData;
 
         while (true) {
 
-            //its going to need to scan for href or something
-            //also further note, oftentimes the image is src=\"url\"
-
-            //put like, href here
             int start = work.IndexOf("href", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
 
@@ -588,9 +490,6 @@ public class GetLinks {
             work = work.Substring(gt + 1);
             //in this stage, would have the first/whatever number url, plus everything after it
 
-            //now down here, just instead of adding that <p> </p> to the output and removing it, just add the link to the
-            //string array and remove the link + href from the sccanning. repeat until all href links are indexed.
-
             //now down here there is only one '"' which is the end of the link
             int endP = work.IndexOf('"');
             if (endP == -1) {
@@ -601,18 +500,16 @@ public class GetLinks {
             //replace this with add the link to the array
             //currently 0 (start of URL) to endP
             linkArray.Add(work.Substring(0, endP));
-            //nice link is added to array for later
-            //advance past the end of this link so scanning continues
             work = work.Substring(endP + 1);
         }
 
         var decodedSb = new StringBuilder();
         for (int indexCount = 0; indexCount < linkArray.Count; indexCount++) {
-            //for each string in linkArray do something
+        
             decodedSb.Append(linkArray[indexCount]);
-            //add link to thing
+          
             decodedSb.Append("\n");
-            //add a line break after every link
+           
         }
 
         return decodedSb.ToString();
@@ -620,16 +517,11 @@ public class GetLinks {
 }
 
 
-//keeping this separate for now
-//for now, might just make this into a command
 public class GetImageLinks {
     private readonly string chooseURL;
     private readonly string recievePart;
-    //somewhere in here, we need an array to store the links
-    //for images though, due to variable scope we could just keep linkArray
+   
     List<String> linkArray = new List<String>();
-    //linkArray.Add("(url)");
-    //should be uppercase
 
     public GetImageLinks(string pickURL, string parameter) {
         chooseURL = pickURL;
@@ -647,7 +539,6 @@ public class GetImageLinks {
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
 
             var response = await client.GetAsync(chooseURL);
-            // read as string even if not successful so we can inspect
             recievedData = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode) {
@@ -680,105 +571,64 @@ public class GetImageLinks {
         string work = recievedData;
         while (true) {
 
-            //its going to need to scan for href or something
-            //also further note, oftentimes the image is src=\"url\"
-
-            //THIS IS WHERE WE GET IMAGE LINKS
-            //THIS IS THE ONLY PART LEFT TO BASCIALLY CHANGE THE INDEXED LINKS FROM HREF TO SRC ONES
-            //put like, src here
+            
             int start = work.IndexOf("src=", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
             work = work.Substring(start);
 
-            //src="link.jpg"dwuyagbduyawdh
             int gt = work.IndexOf("\"");
-            //first " in the src, so it does get removed
 
             if (gt == -1) break; // malformed
 
-            //gt = 4 in example
             work = work.Substring(gt + 1);
-            ////link.jpg"dwuyagbduyawdh
-            //in this stage, would have the first/whatever number url, plus everything after it
-
-            //now down here, just instead of adding that <p> </p> to the output and removing it, just add the link to the
-            //string array and remove the link + href from the sccanning. repeat until all href links are indexed.
-
-            //now down here there is only one \" which is the end of the link
+      
             int endP = work.IndexOf("\"", StringComparison.OrdinalIgnoreCase);
-            //endP = index of " of which there is 1
+           
             if (endP == -1) {
-                //if error
+                
 
                 break;
             }
 
 
-            //uses same thing as href and just grabs a raw link here (\"image.png\", \"script.js\", etc)
-            //so actually, we can reuse it but just save the source urls only if it ends in like .jpg .png .jpeg .webp .svg, etc
-            //this allows us to bascially completely re-use the href, and just filter stuff out at a later level
 
 
 
             //now to determine if it is an image using the above mentioned file formats
             string linkToAdd = work.Substring(0, endP);
-            //just declaring it as a simpler variable to reuse
-
-            ////link.jpg"dwuyagbduyawdh
-            //in this example linToAdd is link.jpg
-
-
-
-            //im starting to think error is here as the indexing should work well
-            //at least for a basic image source url from what I am finding
 
             string linkToAddExtension = linkToAdd.Length >= 4 ? linkToAdd.Substring(linkToAdd.Length - 4) : linkToAdd;
             //no idea if that math is even correct to get that extension or not, 4 is lazy way to do .png or jpeg, etc
             if (linkToAddExtension.Equals(".png")) {
                 if ((linkToAdd.Length < 5)||!linkToAdd.Substring(0,4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
-                    //probably should get add url then the actual image if it isnt stored right
                 } else {
                     linkArray.Add(linkToAdd);
                 }
-            //why use || when you can use else if?
             } else if (linkToAddExtension.Equals("jpeg")) {
                 if ((linkToAdd.Length < 5)||!linkToAdd.Substring(0,4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
-                    //probably should get add url then the actual image if it isnt stored right
                 } else {
                     linkArray.Add(linkToAdd);
                 }
             } else if (linkToAddExtension.Equals(".jpg")) {
                 if ((linkToAdd.Length < 5)||!linkToAdd.Substring(0,4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
-                    //probably should get add url then the actual image if it isnt stored right
                 } else {
                     linkArray.Add(linkToAdd);
                 }
             } else if (linkToAddExtension.Equals("webp")) {
                 if ((linkToAdd.Length < 5)||!linkToAdd.Substring(0,4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
-                    //probably should get add url then the actual image if it isnt stored right
                 } else {
                     linkArray.Add(linkToAdd);
                 }
             }
-
-            //part we need to add
-            //now is gonna return a whole lot of stuff
         }
 
 
         string decoded = ("");
             for (int i = 0; i < linkArray.Count; i++) {
-
-        //moving issue space to down here as decoded is empty
-        //Um well anyway it still returns no images found
-        //ohh i realied the http cleint is still just with html not images, that probably is an issue
-        //everything from what I can find the images generally works, so I'm guessing the http whatever is the error
-        //What if I make a simpler image command (not images)
-        //where you jsut put a image source url and we just have this part down here that makes 1 image?
 
                     using var imageClient = new HttpClient();
                     imageClient.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
@@ -789,14 +639,9 @@ public class GetImageLinks {
 
                         using (Stream streamImage = await imageClient.GetStreamAsync(linkArray[i])) {
                         using (Image image = await Image.LoadAsync(streamImage)) {
-                            
 
-                            //here convert given image to ascii then add to decoded
-
-                                //suppsoed example I found
                                             char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
-                                            //potentially reverse depending on color or whatever (light vs dark mode)
-                                            //so reverse this if images look very wrong
+                                            
                                             
 
                                             using Image<Rgb24> imageToPrint = image.CloneAs<Rgb24>();
@@ -819,22 +664,18 @@ public class GetImageLinks {
                                                     for (int x = 0; x < pixelRow.Length; x++) {
                                                         Rgb24 pixel = pixelRow[x];
 
-                                                        // Standard luminance formula to convert RGB to Grayscale
                                                         double luminance = (0.2126 * pixel.R) + (0.7152 * pixel.G) + (0.0722 * pixel.B);
 
-                                                        // Map the 0-255 luminance value to our 0-(AsciiRamp.Length - 1) index
                                                         int rampIndex = (int)(luminance / 255.0 * (AsciiRamp.Length - 1));
 
                                                         asciiBuilder.Append(AsciiRamp[rampIndex]);
                                                     }
 
-                                                    // Move to the next text row
                                                     asciiBuilder.AppendLine();
                                                 }
                                             });
                             
                             decoded = (decoded + asciiBuilder.ToString());
-                            //add the image which should include \n between lines with appendline
                             decoded = (decoded + "\n");
                             decoded = (decoded + "\n");
                             decoded = (decoded + "\n");
@@ -858,13 +699,9 @@ public class GetImageLinks {
 
 
 
-//AAAAAAAAAAAAAAAAAAAA It still says no images found
-//im taking a break
 public class GetImage {
     private readonly string chooseURL;
     private readonly string recievePart;
-    //somewhere in here, we need an array to store the links
-    //for images though, due to variable scope we could just keep linkArray
 
     public GetImage(string pickURL, string parameter) {
         chooseURL = pickURL;
@@ -882,19 +719,17 @@ public class GetImage {
                         using (Image image = await Image.LoadAsync(streamImage)) {
                             String decoded = ("");
 
-                            //here convert given image to ascii then add to decoded
+                           
 
-                                //suppsoed example I found
                                             char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
-                                            //potentially reverse depending on color or whatever (light vs dark mode)
-                                            //so reverse this if images look very wrong
+                                          
                                             
 
                                             using Image<Rgb24> imageToPrint = image.CloneAs<Rgb24>();
                                             int width = imageToPrint.Width;
                                             int height = imageToPrint.Height;
                                             int terminalWidth = 80;
-                                            //change dimensions
+                                          
                                             double aspectRadio = (double)imageToPrint.Height / imageToPrint.Width;
                                             int targetHeight = (int)(terminalWidth * aspectRadio * 0.5);
 
@@ -910,16 +745,16 @@ public class GetImage {
                                                     for (int x = 0; x < pixelRow.Length; x++) {
                                                         Rgb24 pixel = pixelRow[x];
 
-                                                        // Standard luminance formula to convert RGB to Grayscale
+                                                        
                                                         double luminance = (0.2126 * pixel.R) + (0.7152 * pixel.G) + (0.0722 * pixel.B);
 
-                                                        // Map the 0-255 luminance value to our 0-(AsciiRamp.Length - 1) index
+                                                       
                                                         int rampIndex = (int)(luminance / 255.0 * (AsciiRamp.Length - 1));
 
                                                         asciiBuilder.Append(AsciiRamp[rampIndex]);
                                                     }
 
-                                                    // Move to the next text row
+                                                  
                                                     asciiBuilder.AppendLine();
                                                 }
                                             });
