@@ -132,9 +132,58 @@ public class MyProgram {
                 handled = true;
                 //start a game, all handled right here
                 Console.WriteLine("Game starting... (Press escape to exit)");
+
+                //🤖 character | is a blaster shot, # is border of game screen, 👾 is enemy
+                //NO THIS IS NOT AI, I CAN USE EMOJIS MYSELF
                 bool running = true;
+                int playerX = 40;
+                Boolean playerFired = false;
 
                     while (running) {
+                        Console.Clear();
+                        //stuff at start of every frame
+                        playerFired = false;
+
+
+                        //then draw stuff probably here
+                        //top row
+                        for (int i = 0; i < 80; i++) {
+                        Console.Write("#");
+                        }
+                        Console.Write("\n");
+                        for (int  i = 0; i < 37; i++) {
+                        Console.Write("#");
+                            for (int x = 0; x < 36; x++) {
+                            //actual things between the game screen border drawn here
+
+
+
+                            }
+                        Console.Write("#");
+                        Console.Write("\n");
+                        }
+
+
+                        //player row
+                        Console.Write("#");
+                        for (int x = 0; x < 78; x++) {
+                            //actual things between the game screen border drawn here
+                            if (!(x == playerX)) {
+                                Console.Write(" ");
+                            } else {
+                                Console.Write("🤖");
+                            }
+
+                        }
+                        Console.Write("#");
+                        Console.Write("\n");
+
+
+                        //bottom row
+                        for (int i = 0; i < 80; i++) {
+                        Console.Write("#");
+                        }
+
                         //key is pressed
                         if (Console.KeyAvailable) {
                             //in here, define keys and actions
@@ -143,11 +192,38 @@ public class MyProgram {
                             if (keyInfo.Key == ConsoleKey.Escape) {
                                 running = false;
                             }
+
+                            if (keyInfo.Key == ConsoleKey.RightArrow) {
+                                playerX += 1;
+                            }
+                            if (keyInfo.Key == ConsoleKey.LeftArrow) {
+                                playerX -= 1;
+                            }
+                            if (keyInfo.Key == ConsoleKey.UpArrow) {
+                                playerFired = true;
+                            }
+
+                            
+
                         }
                         //post game or background things not related to movement (such as drawing animations)
-                        
-                            //run at around 60 fps
-                            Thread.Sleep(16);
+                        //may need to make a projectile class and enemy class
+                        //enemy basically just has position tracked, and then the move option
+                        //which calculates if it hits a wall or something
+
+                        //projectile just needs to go up, and then have a way to retrieve its x and y as a 
+                        //temporary variable which i will use to calculate when drawing, just need an if 
+                        //statement to check if there is already a projectile.
+
+                        //then just randomly make enemies along the top row, they move back and forth and after
+                        //like 5 or soemthing are in the top row, they move downward to make space for new ones
+                        // also, make them not garunteed to move (like 50/50 chance when going left/right,) up/down
+                        //will always go, but 50/50 makes them move (on average) about half of the player's speed
+                        //so that it is not too unbalanced
+                            Thread.Sleep(17);
+                            //if enemy reached player y for game over,
+                            //calculate enemy movement and projectile firing
+                            
                     }
             }
 
