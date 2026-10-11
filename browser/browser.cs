@@ -134,21 +134,21 @@ public class MyProgram {
                 Console.WriteLine("Game starting... (Press escape to exit)");
                 bool running = true;
 
-        while (running) {
-            //key is pressed
-            if (Console.KeyAvailable) {
-                //in here, define keys and actions
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                
-                if (keyInfo.Key == ConsoleKey.Escape) {
-                    running = false;
-                }
-            }
-            //post game or background things not related to movement (such as drawing animations)
-            
-                //run at around 60 fps
-                Thread.Sleep(16);
-                }
+                    while (running) {
+                        //key is pressed
+                        if (Console.KeyAvailable) {
+                            //in here, define keys and actions
+                            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                            
+                            if (keyInfo.Key == ConsoleKey.Escape) {
+                                running = false;
+                            }
+                        }
+                        //post game or background things not related to movement (such as drawing animations)
+                        
+                            //run at around 60 fps
+                            Thread.Sleep(16);
+                    }
             }
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
