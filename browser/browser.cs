@@ -144,7 +144,7 @@ public class MyProgram {
                         //stuff at start of every frame
                         playerFired = false;
 
-
+                        //ON SECOND THOUGHT, drawing all of this would be easier with a 2d array or grid
                         //then draw stuff probably here
                         //top row
                         for (int i = 0; i < 80; i++) {
