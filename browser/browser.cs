@@ -157,7 +157,7 @@ public class MyProgram {
                 //sell more items, by default just sell most valuable items (exclduing multipliers)
                 //every turn if too many
 
-                int forests = 0;
+                int sawmills = 0;
                 int oilDrills = 0;
                 int fabs = 0;
                 //number of things you have to produce items to sell
@@ -216,7 +216,22 @@ public class MyProgram {
                 while (isPlayingGame) {
                     //note to add a console.Clear(); after every turn/option so that it looks clean
                     //as well as a limit on certain items because if the ints get too big then uh oh
-
+                    Console.WriteLine("1. Upgrade vehicles");
+                    Console.WriteLine("2. Upgrade production");
+                    Console.WriteLine("3. Upgrade multipliers");
+                    Console.WriteLine("4. Extra purchases");
+                    Console.WriteLine("5. Next turn");
+                    Console.WriteLine("6. Save and quit");
+                    Console.WriteLine("# of Sawmills: ");
+                    Console.WriteLine("# of Oil Drills: ");
+                    Console.WriteLine("# of Microchip Fabs: ");
+                    Console.WriteLine("# of Trucks: ");
+                    Console.WriteLine("# of Trains: ");
+                    Console.WriteLine("# of Airplanes: ");
+                    Console.WriteLine("Income per turn: ");
+                    Console.WriteLine("Current money: ");
+                    Console.WriteLine("Current turn: ");
+                    Console.WriteLine("Input an option");
 
 
 
@@ -264,6 +279,8 @@ public class MyProgram {
 
 
                 }
+
+                Console.WriteLine("Your game save code is: ");
 
             }
 
