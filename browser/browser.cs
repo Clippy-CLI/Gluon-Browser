@@ -138,11 +138,61 @@ public class MyProgram {
             if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 //start a game, all handled right here
-                //ideas for game: snake,
-                //game with slight physics (like slope) but 2d, like, idk line rider or something?
+                //ideas for game: evade game
                 Console.WriteLine("Game starting... (Press escape to exit)");
+                    bool running = true;
+                int[,] gameGrid = new int[40, 40];
 
-               
+                    while (running) {
+                        Console.Clear();
+                        //stuff at start of every frame
+
+                        
+
+                        //key is pressed
+                        if (Console.KeyAvailable) {
+                            //in here, define keys and actions
+                            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                            
+                            if (keyInfo.Key == ConsoleKey.Escape) {
+                                running = false;
+                            }
+
+                            if (keyInfo.Key == ConsoleKey.RightArrow) {
+                               
+                            }
+                            if (keyInfo.Key == ConsoleKey.LeftArrow) {
+                               
+                            }
+                            if (keyInfo.Key == ConsoleKey.UpArrow) {
+                                
+                            }
+                            if (keyInfo.Key == ConsoleKey.DownArrow) {
+                                
+                            }
+
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        }
+                            Thread.Sleep(17);
+                    }
             }
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
@@ -676,4 +726,40 @@ public class GetImage {
             return ("Umm something happened");
         }
     }
+}
+
+public class Player {
+    private int x;
+    private int y;
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+}
+public class Wall {
+    private static List<Wall> Walls = new List<Wall>();
+    private int x;
+    private int y;
+    public void moveAllWalls() {
+        //just have a set chance of happening to move in a certain direction, idk if walls should overlap or not
+    }
+    public void createWall () {
+        //always start from edge, call with a certain chance of happening during game loop
+    }
+    public Boolean checkIfTouchingPlayer(Player checkPlayer) {
+        int playerX = checkPlayer.getX();
+        int playerY = checkPlayer.getY();
+        foreach(Wall thisWall in Walls) {
+            if ((x == playerX) && (y == playerY)) {
+                return true; 
+            }
+        }
+
+        return false;
+    }
+    //add wall, remove wall, each wall has an object for its position, then a method can be called
+    //to check for each wall if player is touching, then return true or false
+    //also then start a timer somehow maybe and have that be a score
 }
