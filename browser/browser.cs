@@ -131,6 +131,8 @@ public class MyProgram {
             if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 //start a game, all handled right here
+                //ideas for game: snake,
+                //game with slight physics (like slope) but 2d, like, idk line rider or something?
                 Console.WriteLine("Game starting... (Press escape to exit)");
 
                
