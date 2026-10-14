@@ -142,6 +142,7 @@ public class MyProgram {
                 Console.WriteLine("Game starting... (Press escape to exit)");
                     bool running = true;
                 int[,] gameGrid = new int[40, 40];
+                int counterWalls = 0;
 
                     while (running) {
                         Console.Clear();
@@ -191,6 +192,12 @@ public class MyProgram {
 
 
                         }
+                            int doesSpawnWall = Random.Shared.Next(60);
+                            if (doesSpawnWall == 0) {
+                                //Wall namedThis = new Wall();
+                                //Walls.add("Wall" + counterWalls);
+                                counterWalls++;
+                            }
                             Thread.Sleep(17);
                     }
             }
@@ -737,16 +744,39 @@ public class Player {
     public int getY() {
         return y;
     }
+    public void changeX(int howMuch) {
+        x += howMuch;
+    }
+    public void changeY(int howMuch) {
+        y += howMuch;
+    }
 }
 public class Wall {
-    private static List<Wall> Walls = new List<Wall>();
+    public static List<Wall> Walls = new List<Wall>();
     private int x;
+    private static int score;
     private int y;
     public void moveAllWalls() {
-        //just have a set chance of happening to move in a certain direction, idk if walls should overlap or not
+        //just have a set chance of happening to move in a certain direction,
+        //that certain direction will be from where they are defined, then once they go outside of the thing
+        //they can get deleted and removed from the array
     }
-    public void createWall () {
+    public int getScore() {
+        return score;
+    }
+    public Wall () {
         //always start from edge, call with a certain chance of happening during game loop
+        //add to the array will have to be done during game loop when object name is determined
+        //need to add another thing here, as it will always be 0 or one, should be 0 or 40 so 1 of 4 sides
+        int half = Random.Shared.Next(2);
+        if (half == 0) {
+            x = 0;
+            y = Random.Shared.Next(40);
+        } else {
+            y = 0;
+            x = Random.Shared.Next(40);
+        }
+        score++;
     }
     public Boolean checkIfTouchingPlayer(Player checkPlayer) {
         int playerX = checkPlayer.getX();
@@ -759,7 +789,4 @@ public class Wall {
 
         return false;
     }
-    //add wall, remove wall, each wall has an object for its position, then a method can be called
-    //to check for each wall if player is touching, then return true or false
-    //also then start a timer somehow maybe and have that be a score
 }
