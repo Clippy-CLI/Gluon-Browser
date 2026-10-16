@@ -799,6 +799,11 @@ public class GetImage {
 public class Player {
     private int x;
     private int y;
+
+    public Player() {
+        x = 19;
+        y = 19;
+    }
     public int getX() {
         return x;
     }
