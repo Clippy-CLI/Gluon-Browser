@@ -155,6 +155,7 @@ public class MyProgram {
                     while (running) {
                         //this is going to be the fun part, get all the calculations and such
                         int[,] gameGrid = new int[38, 38];
+                        methodWall.fillArrayWithPositions(gameGrid);
                         //idk what the plan is here, probably jsut have 0 = nothing 1 = wall 2 = player
                         //then after the grid is calculated (probably at the start of each frame) there is something that
                         //will draw it
@@ -174,7 +175,7 @@ public class MyProgram {
                         }
 
                         Console.Clear();
-                        //stuff at start of every frame
+                        //draw game here
 
                         
 
@@ -814,6 +815,11 @@ public class Wall {
     }
     public int getY() {
         return y;
+    }
+    public void fillArrayWithPositions(int[,] fillArray) {
+        foreach (Wall getPos in Walls) {
+            fillArray[getPos.getX(),getPos.getY()] = 1;
+        }
     }
     public Wall () {
         //always start from edge, call with a certain chance of happening during game loop
