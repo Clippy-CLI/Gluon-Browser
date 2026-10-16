@@ -854,7 +854,9 @@ public class Wall {
     }
     public void fillArrayWithPositions(int[,] fillArray) {
         foreach (Wall getPos in Walls) {
+            if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 38) {
             fillArray[getPos.getX(),getPos.getY()] = 1;
+            }
         }
     }
     public Wall () {
