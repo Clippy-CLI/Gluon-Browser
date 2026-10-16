@@ -859,6 +859,7 @@ public class Wall {
             }
         }
     }
+    
     public Wall () {
         //always start from edge, call with a certain chance of happening during game loop
         //add to the array will have to be done during game loop when object name is determined
