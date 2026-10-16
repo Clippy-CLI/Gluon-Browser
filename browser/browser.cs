@@ -177,7 +177,34 @@ public class MyProgram {
                         Console.Clear();
                         //draw game here
 
-                        
+                        //first, draw top
+                        for (int i = 0; i < 40; i++) Console.Write("#");
+                        Console.Write("\n");
+
+                        for (int drawY = 38; drawY > 0; drawY--) {
+                            Console.Write("#");
+
+                            //check each position in a row
+                            for (int drawX = 0; drawX < 38; drawX++) {
+                                if(gameGrid[drawY,drawX] == 0) {
+                                    Console.Write(" ");
+                                } else if(gameGrid[drawY,drawX] == 1) {
+                                    Console.Write("!");
+                                } else if(gameGrid[drawY,drawX] == 2) {
+                                    Console.Write("*");
+                                } else {
+                                    //if this shows up, something probably went wrong
+                                    Console.Write("?");
+                                }
+                            }
+
+                            Console.Write("#");
+                            Console.Write("\n");
+                        }
+
+                        //draw bottom
+                        for (int i = 0; i < 40; i++) Console.Write("#");
+                        Console.Write("\n");
 
                         //key is pressed
                         if (Console.KeyAvailable) {
