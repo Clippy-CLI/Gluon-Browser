@@ -1,6 +1,6 @@
 //Note to self: before a new big version (devlog, promoting, etc with the release of the game probably as
 //being the first actual version or something of the browser) remember to format code, and also remove comments
-//that aren't helpful and were mainly jsut for me.
+//that aren't helpful and were mainly just for me.
 
 //Gluon Browser by Clippy-CLI (Github)
 using SixLabors.ImageSharp;
@@ -145,14 +145,34 @@ public class MyProgram {
                 //ideas for game: evade game
                 Console.WriteLine("Game starting... (Press escape to exit)");
                     bool running = true;
-                int[,] gameGrid = new int[38, 38];
+                
                 Player p = new Player();
-                //idk what the plan is here, probably jsut have 0 = nothing 1 = wall 2 = player
-                //then after the grid is calculated (probably at the start of each frame) there is something that
-                //will draw it
+                Wall methodWall = new Wall();
+                //wall used for calling wall methods
+                
                 int counterWalls = 0;
 
                     while (running) {
+                        //this is going to be the fun part, get all the calculations and such
+                        int[,] gameGrid = new int[38, 38];
+                        //idk what the plan is here, probably jsut have 0 = nothing 1 = wall 2 = player
+                        //then after the grid is calculated (probably at the start of each frame) there is something that
+                        //will draw it
+                        //calculate before, then draw after console.clear
+
+                        gameGrid[p.getX(), p.getY()] = 2;
+                        //automatically, player spot =2
+
+                        //in here, somehow get all wall positions
+
+                        for (int gridX = 0; gridX < 38; gridX++) {
+                            for (int gridY = 0; gridY < 38; gridY++) {
+                                if (gameGrid[gridX, gridY] != 1 && gameGrid[gridX, gridY] != 2) { 
+                                    gameGrid[gridX,gridY] = 0;
+                                }
+                            }
+                        }
+
                         Console.Clear();
                         //stuff at start of every frame
 
@@ -166,7 +186,6 @@ public class MyProgram {
                             if (keyInfo.Key == ConsoleKey.Escape) {
                                 running = false;
                             }
-
                             if (keyInfo.Key == ConsoleKey.RightArrow) {
                                p.changeX(1);
                             }
@@ -207,8 +226,13 @@ public class MyProgram {
                                 counterWalls++;
                             }
                             //around 60 fps
-                            Thread.Sleep(17);
+                            Thread.Sleep(1000);
+                            //should be at around 17 for about 60 fps, but am going to run at 1000
+                            //for easier testing
+                            methodWall.checkIfTouchingPlayer(p);
+                            methodWall.moveAllWalls();
                     }
+                    Console.WriteLine("Your score is: " + counterWalls);
             }
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
@@ -769,10 +793,27 @@ public class Wall {
     private int direction;
     //0 = up, 1 = right, 2, down, 3 left
     public void moveAllWalls() {
-        
+        foreach(Wall thisWall in Walls) {
+            if (direction == 0) {
+                y += 1;
+            } else if (direction == 1) {
+                x += 1;
+            } else if (direction == 2) {
+                y -= 1;
+            } else if (direction == 3) {
+                x -= 1;
+            }
+        }
     }
     public int getScore() {
         return score;
+    }
+
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
     }
     public Wall () {
         //always start from edge, call with a certain chance of happening during game loop
