@@ -1,3 +1,7 @@
+//Note to self: before a new big version (devlog, promoting, etc with the release of the game probably as
+//being the first actual version or something of the browser) remember to format code, and also remove comments
+//that aren't helpful and were mainly jsut for me.
+
 //Gluon Browser by Clippy-CLI (Github)
 using SixLabors.ImageSharp;
 using System.IO;
@@ -141,7 +145,11 @@ public class MyProgram {
                 //ideas for game: evade game
                 Console.WriteLine("Game starting... (Press escape to exit)");
                     bool running = true;
-                int[,] gameGrid = new int[40, 40];
+                int[,] gameGrid = new int[38, 38];
+                Player p = new Player();
+                //idk what the plan is here, probably jsut have 0 = nothing 1 = wall 2 = player
+                //then after the grid is calculated (probably at the start of each frame) there is something that
+                //will draw it
                 int counterWalls = 0;
 
                     while (running) {
@@ -160,16 +168,16 @@ public class MyProgram {
                             }
 
                             if (keyInfo.Key == ConsoleKey.RightArrow) {
-                               
+                               p.changeX(1);
                             }
                             if (keyInfo.Key == ConsoleKey.LeftArrow) {
-                               
+                               p.changeX(-1);
                             }
                             if (keyInfo.Key == ConsoleKey.UpArrow) {
-                                
+                                p.changeY(1);
                             }
                             if (keyInfo.Key == ConsoleKey.DownArrow) {
-                                
+                                p.changeY(-1);
                             }
 
                             
@@ -198,6 +206,7 @@ public class MyProgram {
                                 //Walls.add("Wall" + counterWalls);
                                 counterWalls++;
                             }
+                            //around 60 fps
                             Thread.Sleep(17);
                     }
             }
@@ -752,14 +761,15 @@ public class Player {
     }
 }
 public class Wall {
+    //still need a mehtod to get wall x and y for drawing the game screen
     public static List<Wall> Walls = new List<Wall>();
     private int x;
     private static int score;
     private int y;
+    private int direction;
+    //0 = up, 1 = right, 2, down, 3 left
     public void moveAllWalls() {
-        //just have a set chance of happening to move in a certain direction,
-        //that certain direction will be from where they are defined, then once they go outside of the thing
-        //they can get deleted and removed from the array
+        
     }
     public int getScore() {
         return score;
@@ -768,15 +778,26 @@ public class Wall {
         //always start from edge, call with a certain chance of happening during game loop
         //add to the array will have to be done during game loop when object name is determined
         //need to add another thing here, as it will always be 0 or one, should be 0 or 40 so 1 of 4 sides
-        int half = Random.Shared.Next(2);
+        int half = Random.Shared.Next(4);
         if (half == 0) {
-            x = 0;
-            y = Random.Shared.Next(40);
-        } else {
+            direction = 0;
+            x = Random.Shared.Next(38);
             y = 0;
-            x = Random.Shared.Next(40);
+        } else if (half == 1) {
+            direction = 1;
+            y = Random.Shared.Next(38);
+            x = 0;
+        } else if (half == 2) {
+            direction = 2;
+            y = 38;
+            x = Random.Shared.Next(38);
+        } else if (half == 3) {
+            direction = 3;
+            y = Random.Shared.Next(38);
+            x = 38;
         }
         score++;
+        Walls.Add(this);
     }
     public Boolean checkIfTouchingPlayer(Player checkPlayer) {
         int playerX = checkPlayer.getX();
@@ -786,7 +807,6 @@ public class Wall {
                 return true; 
             }
         }
-
         return false;
     }
 }
