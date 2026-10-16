@@ -811,10 +811,14 @@ public class Player {
         return y;
     }
     public void changeX(int howMuch) {
+        if (x < 38 && x > 0) {
         x += howMuch;
+        }
     }
     public void changeY(int howMuch) {
+        if (y < 38 && y > 0) {
         y += howMuch;
+        }
     }
 }
 public class Wall {
