@@ -181,7 +181,7 @@ public class MyProgram {
                         for (int i = 0; i < 40; i++) Console.Write("#");
                         Console.Write("\n");
 
-                        for (int drawY = 38; drawY > 0; drawY--) {
+                        for (int drawY = 37; drawY >= 0; drawY--) {
                             Console.Write("#");
 
                             //check each position in a row
@@ -205,6 +205,7 @@ public class MyProgram {
                         //draw bottom
                         for (int i = 0; i < 40; i++) Console.Write("#");
                         Console.Write("\n");
+
 
                         //key is pressed
                         if (Console.KeyAvailable) {
