@@ -250,8 +250,7 @@ public class MyProgram {
                         }
                             int doesSpawnWall = Random.Shared.Next(60);
                             if (doesSpawnWall == 0) {
-                                //Wall namedThis = new Wall();
-                                //Walls.add("Wall" + counterWalls);
+                                Wall idkWallName = new Wall();
                                 counterWalls++;
                             }
                             //around 60 fps
