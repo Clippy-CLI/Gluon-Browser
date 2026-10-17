@@ -1,9 +1,12 @@
 # Gluon-Browser
 A simple, lightweight, fast, and secure browser that runs from the command line!
-(PUT A GIF HERE, LOOK UP A WEBSITE AND THEN IMAGE)
+(PUT A GIF HERE, LOOK UP A WEBSITE AND THEN IMAGE!)
 
 # About/Features
 It is a web browser that runs quickly without telemetry and can be used to browse the web efficiently. It has many useful features such as tabs, saving pages for offline, and even a built-in game if you want something to spend time on!
+
+# Game
+Includes a fun built in game where you must move to avoid incoming walls, can be quite fun to play for awhile. It was based on one of my first ever games I made.
 
 # How To Use
 First, you need to be able to run the software. You can either download and compile the github project so that you can run it on your own computer, or you can use this link: (PUT DEMO LINK HERE ONCE COMPLETE) to run it inside of a browser, so that you do not need to download anything to try it!
