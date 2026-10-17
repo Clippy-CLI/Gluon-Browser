@@ -11,7 +11,6 @@ using System.Net;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
-
 public class MyProgram {
     public static async Task Main(string[] args) {
         Console.Clear();
