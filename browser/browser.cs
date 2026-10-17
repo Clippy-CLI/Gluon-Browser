@@ -248,14 +248,14 @@ public class MyProgram {
 
 
                         }
-                            int doesSpawnWall = Random.Shared.Next(2);
+                            int doesSpawnWall = Random.Shared.Next(60);
                             if (doesSpawnWall == 0) {
                                 //Wall namedThis = new Wall();
                                 //Walls.add("Wall" + counterWalls);
                                 counterWalls++;
                             }
                             //around 60 fps
-                            Thread.Sleep(1000);
+                            Thread.Sleep(17);
                             //should be at around 17 for about 60 fps, but am going to run at 1000
                             //for easier testing
                             methodWall.checkIfTouchingPlayer(p);
