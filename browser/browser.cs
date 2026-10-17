@@ -269,6 +269,7 @@ public class MyProgram {
 
                     }
                     Console.WriteLine("Your score is: " + counterWalls);
+                    methodWall.clearAllWalls();
             }
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
@@ -902,5 +903,9 @@ public class Wall {
             }
         }
         return false;
+    }
+
+    public void clearAllWalls() {
+            Walls.Clear();
     }
 }
