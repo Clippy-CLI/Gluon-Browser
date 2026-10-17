@@ -835,14 +835,14 @@ public class Wall {
     //0 = up, 1 = right, 2, down, 3 left
     public void moveAllWalls() {
         foreach(Wall thisWall in Walls) {
-            if (direction == 0) {
-                y += 1;
+            if (thisWall.direction == 0) {
+                thisWall.y += 1;
             } else if (direction == 1) {
-                x += 1;
+                thisWall.x += 1;
             } else if (direction == 2) {
-                y -= 1;
+                thisWall.y -= 1;
             } else if (direction == 3) {
-                x -= 1;
+                thisWall.x -= 1;
             }
         }
     }
