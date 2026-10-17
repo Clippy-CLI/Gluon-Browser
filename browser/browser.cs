@@ -1,7 +1,3 @@
-//Note to self: before a new big version (devlog, promoting, etc with the release of the game probably as
-//being the first actual version or something of the browser) remember to format code, and also remove comments
-//that aren't helpful and were mainly just for me.
-
 //Gluon Browser by Clippy-CLI (Github)
 using SixLabors.ImageSharp;
 using System.IO;
@@ -25,7 +21,7 @@ public class MyProgram {
         Console.WriteLine(" ##   \\ /   ## ");
         Console.WriteLine("  ##   O   ##  ");
         Console.WriteLine("    #######    ");
-        //neat image for now
+        //tried to make ascii of a gluon
         Console.WriteLine("Welcome to Gluon browser!");
         Console.WriteLine("Type help for a list of commands");
         Console.WriteLine("Type exit to quit");
@@ -48,7 +44,6 @@ public class MyProgram {
 
             if (input.Equals("common")) {
                 handled = true;
-                //prints some common webpages
                 Console.WriteLine("Common Webpages:");
 
                 Console.WriteLine("Wikipedia: https://en.wikipedia.org/wiki/(page)");
@@ -141,122 +136,107 @@ public class MyProgram {
 
             if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
-                //start a game, all handled right here
-                //ideas for game: evade game
                 Console.WriteLine("Game starting... (Press escape to exit)");
                 Console.WriteLine("Use arrow keys to move *, avoid !");
                 Thread.Sleep(3000);
-                    bool running = true;
-                
+                bool running = true;
+
                 Player p = new Player();
                 Wall methodWall = new Wall();
-                //wall used for calling wall methods
-                
+
                 int counterWalls = 0;
                 int approxFrame = 0;
-                    while (running) {
-                        Console.CursorVisible = false;
-                        //this is going to be the fun part, get all the calculations and such
-                        int[,] gameGrid = new int[38, 19];
-                        methodWall.fillArrayWithPositions(gameGrid);
-                        //idk what the plan is here, probably jsut have 0 = nothing 1 = wall 2 = player
-                        //then after the grid is calculated (probably at the start of each frame) there is something that
-                        //will draw it
-                        //calculate before, then draw after console.clear
+                while (running) {
+                    Console.CursorVisible = false;
+                    int[,] gameGrid = new int[38, 19];
+                    methodWall.fillArrayWithPositions(gameGrid);
 
-                        if (gameGrid[p.getX(), p.getY()] != 1) {
+                    if (gameGrid[p.getX(), p.getY()] != 1) {
                         gameGrid[p.getX(), p.getY()] = 2;
-                        } else {
+                    }
+                    else {
+                        running = false;
+                    }
+
+                    for (int gridX = 0; gridX < 38; gridX++) {
+                        for (int gridY = 0; gridY < 19; gridY++) {
+                            if (gameGrid[gridX, gridY] != 1 && gameGrid[gridX, gridY] != 2) {
+                                gameGrid[gridX, gridY] = 0;
+                            }
+                        }
+                    }
+
+
+
+
+                    if (Console.KeyAvailable) {
+                        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                        if (keyInfo.Key == ConsoleKey.Escape) {
                             running = false;
                         }
-                        //automatically, player spot =2
+                        if (keyInfo.Key == ConsoleKey.RightArrow) {
+                            p.changeX(1);
+                        }
+                        if (keyInfo.Key == ConsoleKey.LeftArrow) {
+                            p.changeX(-1);
+                        }
+                        if (keyInfo.Key == ConsoleKey.UpArrow) {
+                            p.changeY(1);
+                        }
+                        if (keyInfo.Key == ConsoleKey.DownArrow) {
+                            p.changeY(-1);
+                        }
+                    }
+                    int doesSpawnWall = Random.Shared.Next(60);
+                    if (doesSpawnWall == 0) {
+                        Wall idkWallName = new Wall();
+                        counterWalls++;
+                    }
 
-                        //in here, somehow get all wall positions
+                    Thread.Sleep(16);
+                    if ((approxFrame % 60) == 0) {
+                        methodWall.moveAllWalls();
+                    }
+                    approxFrame++;
 
-                        for (int gridX = 0; gridX < 38; gridX++) {
-                            for (int gridY = 0; gridY < 19; gridY++) {
-                                if (gameGrid[gridX, gridY] != 1 && gameGrid[gridX, gridY] != 2) { 
-                                    gameGrid[gridX,gridY] = 0;
-                                }
+
+
+
+                    Console.Clear();
+
+                    for (int i = 0; i < 40; i++) Console.Write("#");
+                    Console.Write("\n");
+
+                    for (int drawY = 18; drawY >= 0; drawY--) {
+                        Console.Write("#");
+
+                        for (int drawX = 0; drawX < 38; drawX++) {
+                            if (gameGrid[drawX, drawY] == 0) {
+                                Console.Write(" ");
+                            }
+                            else if (gameGrid[drawX, drawY] == 1) {
+                                Console.Write("!");
+                            }
+                            else if (gameGrid[drawX, drawY] == 2) {
+                                Console.Write("*");
+                            }
+                            else {
+                                Console.Write("?");
                             }
                         }
 
-                        
-
-
-                        //key is pressed
-                        if (Console.KeyAvailable) {
-                            //in here, define keys and actions
-                            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                            
-                            if (keyInfo.Key == ConsoleKey.Escape) {
-                                running = false;
-                            }
-                            if (keyInfo.Key == ConsoleKey.RightArrow) {
-                               p.changeX(1);
-                            }
-                            if (keyInfo.Key == ConsoleKey.LeftArrow) {
-                               p.changeX(-1);
-                            }
-                            if (keyInfo.Key == ConsoleKey.UpArrow) {
-                                p.changeY(1);
-                            }
-                            if (keyInfo.Key == ConsoleKey.DownArrow) {
-                                p.changeY(-1);
-                            }
-                        }
-                            int doesSpawnWall = Random.Shared.Next(60);
-                            if (doesSpawnWall == 0) {
-                                Wall idkWallName = new Wall();
-                                counterWalls++;
-                            }
-
-                            Thread.Sleep(16);
-                            //methodWall.checkIfTouchingPlayer(p);
-                            if ((approxFrame % 60) == 0){
-                            methodWall.moveAllWalls();
-                            }
-                            approxFrame++;
-
-
-
-
-                            Console.Clear();
-                        //draw game here
-
-                        //first, draw top
-                        for (int i = 0; i < 40; i++) Console.Write("#");
-                        Console.Write("\n");
-
-                        for (int drawY = 18; drawY >= 0; drawY--) {
-                            Console.Write("#");
-
-                            //check each position in a row
-                            for (int drawX = 0; drawX < 38; drawX++) {
-                                if(gameGrid[drawX,drawY] == 0) {
-                                    Console.Write(" ");
-                                } else if(gameGrid[drawX,drawY] == 1) {
-                                    Console.Write("!");
-                                } else if(gameGrid[drawX,drawY] == 2) {
-                                    Console.Write("*");
-                                } else {
-                                    //if this shows up, something probably went wrong
-                                    Console.Write("?");
-                                }
-                            }
-
-                            Console.Write("#");
-                            Console.Write("\n");
-                        }
-
-                        //draw bottom
-                        for (int i = 0; i < 40; i++) Console.Write("#");
+                        Console.Write("#");
                         Console.Write("\n");
                     }
 
-                    Console.WriteLine("Your score is: " + counterWalls);
-                    methodWall.clearAllWalls();
-                    Console.CursorVisible = true;
+                    for (int i = 0; i < 40; i++) Console.Write("#");
+                    Console.Write("\n");
+                }
+
+                Console.WriteLine("Your score is: " + counterWalls);
+                methodWall.clearAllWalls();
+                Console.CursorVisible = true;
             }
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
@@ -393,7 +373,7 @@ public class GetData {
 
             work = work.Substring(start);
             int gt = work.IndexOf('>');
-            if (gt == -1) break; // malformed
+            if (gt == -1) break;
 
             work = work.Substring(gt + 1);
             int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
@@ -412,13 +392,12 @@ public class GetData {
 
         string cleaned = recievedNew.ToString();
 
-        // remove any remaining tags
         var sb = new StringBuilder();
         bool inTag = false;
         for (int i = 0; i < cleaned.Length; i++) {
             char c = cleaned[i];
             if (!inTag) {
-                if (c == '<')  { inTag = true; if (sb.Length > 0 && !char.IsWhiteSpace(sb[sb.Length - 1])) sb.Append(' '); }
+                if (c == '<') { inTag = true; if (sb.Length > 0 && !char.IsWhiteSpace(sb[sb.Length - 1])) sb.Append(' '); }
                 else sb.Append(c);
             }
             else {
@@ -427,7 +406,6 @@ public class GetData {
         }
 
         string decoded = WebUtility.HtmlDecode(sb.ToString());
-        // collapse whitespace and trim
         decoded = Regex.Replace(decoded, "\\s+", " ").Trim();
 
         return decoded;
@@ -455,7 +433,6 @@ public class GetLinks {
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
 
             var response = await client.GetAsync(chooseURL);
-            // read as string even if not successful so we can inspect
             recievedData = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode) {
@@ -493,22 +470,17 @@ public class GetLinks {
 
             work = work.Substring(start);
             int gt = work.IndexOf('"');
-            //first \" in the link, so it does get removed
 
-            if (gt == -1) break; // malformed
+            if (gt == -1) break;
 
             work = work.Substring(gt + 1);
-            //in this stage, would have the first/whatever number url, plus everything after it
 
-            //now down here there is only one '"' which is the end of the link
             int endP = work.IndexOf('"');
             if (endP == -1) {
-                // take remainder
+
                 break;
             }
 
-            //replace this with add the link to the array
-            //currently 0 (start of URL) to endP
             linkArray.Add(work.Substring(0, endP));
             work = work.Substring(endP + 1);
         }
@@ -589,7 +561,7 @@ public class GetImageLinks {
 
             int gt = work.IndexOf("\"");
 
-            if (gt == -1) break; // malformed
+            if (gt == -1) break;
 
             work = work.Substring(gt + 1);
 
@@ -605,11 +577,9 @@ public class GetImageLinks {
 
 
 
-            //now to determine if it is an image using the above mentioned file formats
             string linkToAdd = work.Substring(0, endP);
 
             string linkToAddExtension = linkToAdd.Length >= 4 ? linkToAdd.Substring(linkToAdd.Length - 4) : linkToAdd;
-            //no idea if that math is even correct to get that extension or not, 4 is lazy way to do .png or jpeg, etc
             if (linkToAddExtension.Equals(".png")) {
                 if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
                     linkArray.Add(chooseURL + linkToAdd);
@@ -658,7 +628,7 @@ public class GetImageLinks {
             using (Stream streamImage = await imageClient.GetStreamAsync(linkArray[i])) {
                 using (Image image = await Image.LoadAsync(streamImage)) {
 
-                    char[] AsciiRamp =  { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+                    char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
 
 
 
@@ -666,11 +636,10 @@ public class GetImageLinks {
                     int width = imageToPrint.Width;
                     int height = imageToPrint.Height;
                     int targetWidth = 80;
-                    //change dimensions
                     double aspectRadio = (double)imageToPrint.Height / imageToPrint.Width;
                     int targetHeight = (int)(targetWidth * aspectRadio * 0.5);
 
-                    //resize
+
                     imageToPrint.Mutate(ctx => ctx.Resize(targetWidth, targetHeight));
 
                     var asciiBuilder = new StringBuilder();
@@ -697,7 +666,6 @@ public class GetImageLinks {
                     decoded = (decoded + "\n");
                     decoded = (decoded + "\n");
                     decoded = (decoded + "\n");
-                    //big line break between each image
                 }
             }
 
@@ -739,7 +707,7 @@ public class GetImage {
 
 
 
-                    char[] AsciiRamp =  { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+                    char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
 
 
 
@@ -751,7 +719,6 @@ public class GetImage {
                     double aspectRadio = (double)imageToPrint.Height / imageToPrint.Width;
                     int targetHeight = (int)(terminalWidth * aspectRadio * 0.5);
 
-                    //resize
                     imageToPrint.Mutate(ctx => ctx.Resize(terminalWidth, targetHeight));
 
                     var asciiBuilder = new StringBuilder();
@@ -778,7 +745,6 @@ public class GetImage {
                     });
                     Console.WriteLine(asciiBuilder);
                     decoded = (decoded + asciiBuilder.ToString());
-                    //big line break between each image
                     return decoded;
                 }
             }
@@ -808,17 +774,16 @@ public class Player {
     }
     public void changeX(int howMuch) {
         if (!((x + howMuch) > 37) && !((x + howMuch) < 0)) {
-        x += howMuch;
+            x += howMuch;
         }
     }
     public void changeY(int howMuch) {
         if (!((y + howMuch) > 18) && !((y + howMuch) < 0)) {
-        y += howMuch;
+            y += howMuch;
         }
     }
 }
 public class Wall {
-    //still need a mehtod to get wall x and y for drawing the game screen
     public static List<Wall> Walls = new List<Wall>();
     private int x;
     private static int score;
@@ -826,14 +791,17 @@ public class Wall {
     private int direction;
     //0 = up, 1 = right, 2, down, 3 left
     public void moveAllWalls() {
-        foreach(Wall thisWall in Walls) {
+        foreach (Wall thisWall in Walls) {
             if (thisWall.direction == 0) {
                 thisWall.y += 1;
-            } else if (thisWall.direction == 1) {
+            }
+            else if (thisWall.direction == 1) {
                 thisWall.x += 1;
-            } else if (thisWall.direction == 2) {
+            }
+            else if (thisWall.direction == 2) {
                 thisWall.y -= 1;
-            } else if (thisWall.direction == 3) {
+            }
+            else if (thisWall.direction == 3) {
                 thisWall.x -= 1;
             }
         }
@@ -851,29 +819,29 @@ public class Wall {
     public void fillArrayWithPositions(int[,] fillArray) {
         foreach (Wall getPos in Walls) {
             if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 19) {
-            fillArray[getPos.getX(),getPos.getY()] = 1;
+                fillArray[getPos.getX(), getPos.getY()] = 1;
             }
         }
     }
-    
-    public Wall () {
-        //always start from edge, call with a certain chance of happening during game loop
-        //add to the array will have to be done during game loop when object name is determined
-        //need to add another thing here, as it will always be 0 or one, should be 0 or 40 so 1 of 4 sides
+
+    public Wall() {
         int half = Random.Shared.Next(4);
         if (half == 0) {
             direction = 0;
             x = Random.Shared.Next(38);
             y = 0;
-        } else if (half == 1) {
+        }
+        else if (half == 1) {
             direction = 1;
             y = Random.Shared.Next(19);
             x = 0;
-        } else if (half == 2) {
+        }
+        else if (half == 2) {
             direction = 2;
             y = 38;
             x = Random.Shared.Next(38);
-        } else if (half == 3) {
+        }
+        else if (half == 3) {
             direction = 3;
             y = Random.Shared.Next(19);
             x = 38;
@@ -884,15 +852,15 @@ public class Wall {
     public Boolean checkIfTouchingPlayer(Player checkPlayer) {
         int playerX = checkPlayer.getX();
         int playerY = checkPlayer.getY();
-        foreach(Wall thisWall in Walls) {
+        foreach (Wall thisWall in Walls) {
             if ((thisWall.x == playerX) && (thisWall.y == playerY)) {
-                return true; 
+                return true;
             }
         }
         return false;
     }
 
     public void clearAllWalls() {
-            Walls.Clear();
+        Walls.Clear();
     }
 }
