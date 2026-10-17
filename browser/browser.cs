@@ -144,6 +144,8 @@ public class MyProgram {
                 //start a game, all handled right here
                 //ideas for game: evade game
                 Console.WriteLine("Game starting... (Press escape to exit)");
+                Console.WriteLine("Use arrow keys to move *, avoid !");
+                Thread.Sleep(3000);
                     bool running = true;
                 
                 Player p = new Player();
