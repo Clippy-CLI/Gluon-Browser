@@ -255,8 +255,7 @@ public class MyProgram {
                                 Wall idkWallName = new Wall();
                                 counterWalls++;
                             }
-                            //around 30 fps
-                            Thread.Sleep(33);
+                            Thread.Sleep(16);
                             methodWall.checkIfTouchingPlayer(p);
                             if ((approxFrame % 60) == 0){
                             methodWall.moveAllWalls();
