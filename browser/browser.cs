@@ -163,7 +163,9 @@ public class MyProgram {
                         //will draw it
                         //calculate before, then draw after console.clear
 
+                        if (gameGrid[p.getX(), p.getY()] != 1) {
                         gameGrid[p.getX(), p.getY()] = 2;
+                        }
                         //automatically, player spot =2
 
                         //in here, somehow get all wall positions
