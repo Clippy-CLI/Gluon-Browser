@@ -209,6 +209,7 @@ public class MyProgram {
                                 Wall idkWallName = new Wall();
                                 counterWalls++;
                             }
+                            
                             Thread.Sleep(16);
                             //methodWall.checkIfTouchingPlayer(p);
                             if ((approxFrame % 60) == 0){
@@ -250,24 +251,8 @@ public class MyProgram {
                         //draw bottom
                         for (int i = 0; i < 40; i++) Console.Write("#");
                         Console.Write("\n");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     }
+
                     Console.WriteLine("Your score is: " + counterWalls);
                     methodWall.clearAllWalls();
             }
