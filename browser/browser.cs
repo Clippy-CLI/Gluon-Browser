@@ -176,37 +176,7 @@ public class MyProgram {
                             }
                         }
 
-                        Console.Clear();
-                        //draw game here
-
-                        //first, draw top
-                        for (int i = 0; i < 40; i++) Console.Write("#");
-                        Console.Write("\n");
-
-                        for (int drawY = 18; drawY >= 0; drawY--) {
-                            Console.Write("#");
-
-                            //check each position in a row
-                            for (int drawX = 0; drawX < 38; drawX++) {
-                                if(gameGrid[drawX,drawY] == 0) {
-                                    Console.Write(" ");
-                                } else if(gameGrid[drawX,drawY] == 1) {
-                                    Console.Write("!");
-                                } else if(gameGrid[drawX,drawY] == 2) {
-                                    Console.Write("*");
-                                } else {
-                                    //if this shows up, something probably went wrong
-                                    Console.Write("?");
-                                }
-                            }
-
-                            Console.Write("#");
-                            Console.Write("\n");
-                        }
-
-                        //draw bottom
-                        for (int i = 0; i < 40; i++) Console.Write("#");
-                        Console.Write("\n");
+                        
 
 
                         //key is pressed
@@ -241,6 +211,58 @@ public class MyProgram {
                             methodWall.moveAllWalls();
                             }
                             approxFrame++;
+
+
+
+
+                            Console.Clear();
+                        //draw game here
+
+                        //first, draw top
+                        for (int i = 0; i < 40; i++) Console.Write("#");
+                        Console.Write("\n");
+
+                        for (int drawY = 18; drawY >= 0; drawY--) {
+                            Console.Write("#");
+
+                            //check each position in a row
+                            for (int drawX = 0; drawX < 38; drawX++) {
+                                if(gameGrid[drawX,drawY] == 0) {
+                                    Console.Write(" ");
+                                } else if(gameGrid[drawX,drawY] == 1) {
+                                    Console.Write("!");
+                                } else if(gameGrid[drawX,drawY] == 2) {
+                                    Console.Write("*");
+                                } else {
+                                    //if this shows up, something probably went wrong
+                                    Console.Write("?");
+                                }
+                            }
+
+                            Console.Write("#");
+                            Console.Write("\n");
+                        }
+
+                        //draw bottom
+                        for (int i = 0; i < 40; i++) Console.Write("#");
+                        Console.Write("\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     }
                     Console.WriteLine("Your score is: " + counterWalls);
             }
@@ -836,7 +858,7 @@ public class Wall {
     }
     public void fillArrayWithPositions(int[,] fillArray) {
         foreach (Wall getPos in Walls) {
-            if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 20) {
+            if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 19) {
             fillArray[getPos.getX(),getPos.getY()] = 1;
             }
         }
