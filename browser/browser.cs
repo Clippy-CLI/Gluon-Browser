@@ -819,7 +819,7 @@ public class Player {
         }
     }
     public void changeY(int howMuch) {
-        if (y < 38 && y > 0) {
+        if (y < 19 && y > 0) {
         y += howMuch;
         }
     }
