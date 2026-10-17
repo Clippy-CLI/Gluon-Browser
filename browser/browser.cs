@@ -154,7 +154,7 @@ public class MyProgram {
 
                     while (running) {
                         //this is going to be the fun part, get all the calculations and such
-                        int[,] gameGrid = new int[38, 38];
+                        int[,] gameGrid = new int[38, 19];
                         methodWall.fillArrayWithPositions(gameGrid);
                         //idk what the plan is here, probably jsut have 0 = nothing 1 = wall 2 = player
                         //then after the grid is calculated (probably at the start of each frame) there is something that
@@ -167,7 +167,7 @@ public class MyProgram {
                         //in here, somehow get all wall positions
 
                         for (int gridX = 0; gridX < 38; gridX++) {
-                            for (int gridY = 0; gridY < 38; gridY++) {
+                            for (int gridY = 0; gridY < 19; gridY++) {
                                 if (gameGrid[gridX, gridY] != 1 && gameGrid[gridX, gridY] != 2) { 
                                     gameGrid[gridX,gridY] = 0;
                                 }
@@ -181,16 +181,16 @@ public class MyProgram {
                         for (int i = 0; i < 40; i++) Console.Write("#");
                         Console.Write("\n");
 
-                        for (int drawY = 37; drawY >= 0; drawY--) {
+                        for (int drawY = 18; drawY >= 0; drawY--) {
                             Console.Write("#");
 
                             //check each position in a row
                             for (int drawX = 0; drawX < 38; drawX++) {
-                                if(gameGrid[drawY,drawX] == 0) {
+                                if(gameGrid[drawX,drawY] == 0) {
                                     Console.Write(" ");
-                                } else if(gameGrid[drawY,drawX] == 1) {
+                                } else if(gameGrid[drawX,drawY] == 1) {
                                     Console.Write("!");
-                                } else if(gameGrid[drawY,drawX] == 2) {
+                                } else if(gameGrid[drawX,drawY] == 2) {
                                     Console.Write("*");
                                 } else {
                                     //if this shows up, something probably went wrong
@@ -248,7 +248,7 @@ public class MyProgram {
 
 
                         }
-                            int doesSpawnWall = Random.Shared.Next(60);
+                            int doesSpawnWall = Random.Shared.Next(2);
                             if (doesSpawnWall == 0) {
                                 //Wall namedThis = new Wall();
                                 //Walls.add("Wall" + counterWalls);
@@ -803,7 +803,7 @@ public class Player {
 
     public Player() {
         x = 19;
-        y = 19;
+        y = 10;
     }
     public int getX() {
         return x;
@@ -855,7 +855,7 @@ public class Wall {
     }
     public void fillArrayWithPositions(int[,] fillArray) {
         foreach (Wall getPos in Walls) {
-            if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 38) {
+            if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 20) {
             fillArray[getPos.getX(),getPos.getY()] = 1;
             }
         }
@@ -872,7 +872,7 @@ public class Wall {
             y = 0;
         } else if (half == 1) {
             direction = 1;
-            y = Random.Shared.Next(38);
+            y = Random.Shared.Next(19);
             x = 0;
         } else if (half == 2) {
             direction = 2;
@@ -880,7 +880,7 @@ public class Wall {
             x = Random.Shared.Next(38);
         } else if (half == 3) {
             direction = 3;
-            y = Random.Shared.Next(38);
+            y = Random.Shared.Next(19);
             x = 38;
         }
         score++;
