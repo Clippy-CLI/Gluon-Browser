@@ -155,6 +155,7 @@ public class MyProgram {
                 int counterWalls = 0;
                 int approxFrame = 0;
                     while (running) {
+                        Console.CursorVisible = false;
                         //this is going to be the fun part, get all the calculations and such
                         int[,] gameGrid = new int[38, 19];
                         methodWall.fillArrayWithPositions(gameGrid);
@@ -209,7 +210,7 @@ public class MyProgram {
                                 Wall idkWallName = new Wall();
                                 counterWalls++;
                             }
-                            
+
                             Thread.Sleep(16);
                             //methodWall.checkIfTouchingPlayer(p);
                             if ((approxFrame % 60) == 0){
@@ -255,6 +256,7 @@ public class MyProgram {
 
                     Console.WriteLine("Your score is: " + counterWalls);
                     methodWall.clearAllWalls();
+                    Console.CursorVisible = true;
             }
 
             if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
