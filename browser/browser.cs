@@ -837,11 +837,11 @@ public class Wall {
         foreach(Wall thisWall in Walls) {
             if (thisWall.direction == 0) {
                 thisWall.y += 1;
-            } else if (direction == 1) {
+            } else if (thisWall.direction == 1) {
                 thisWall.x += 1;
-            } else if (direction == 2) {
+            } else if (thisWall.direction == 2) {
                 thisWall.y -= 1;
-            } else if (direction == 3) {
+            } else if (thisWall.direction == 3) {
                 thisWall.x -= 1;
             }
         }
@@ -893,7 +893,7 @@ public class Wall {
         int playerX = checkPlayer.getX();
         int playerY = checkPlayer.getY();
         foreach(Wall thisWall in Walls) {
-            if ((x == playerX) && (y == playerY)) {
+            if ((thisWall.x == playerX) && (thisWall.y == playerY)) {
                 return true; 
             }
         }
