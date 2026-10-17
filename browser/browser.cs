@@ -210,7 +210,7 @@ public class MyProgram {
                                 counterWalls++;
                             }
                             Thread.Sleep(16);
-                            methodWall.checkIfTouchingPlayer(p);
+                            //methodWall.checkIfTouchingPlayer(p);
                             if ((approxFrame % 60) == 0){
                             methodWall.moveAllWalls();
                             }
