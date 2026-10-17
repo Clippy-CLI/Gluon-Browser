@@ -151,7 +151,7 @@ public class MyProgram {
                 //wall used for calling wall methods
                 
                 int counterWalls = 0;
-
+                int approxFrame = 0;
                     while (running) {
                         //this is going to be the fun part, get all the calculations and such
                         int[,] gameGrid = new int[38, 19];
@@ -258,7 +258,10 @@ public class MyProgram {
                             //should be at around 17 for about 60 fps, but am going to run at 1000
                             //for easier testing
                             methodWall.checkIfTouchingPlayer(p);
+                            if ((approxFrame % 60) == 0){
                             methodWall.moveAllWalls();
+                            }
+                            approxFrame++;
                     }
                     Console.WriteLine("Your score is: " + counterWalls);
             }
