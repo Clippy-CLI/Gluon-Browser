@@ -125,13 +125,6 @@ public class MyProgram {
                 Console.Clear();
             }
 
-            if (input.Equals("legal", StringComparison.OrdinalIgnoreCase)) {
-                handled = true;
-                Console.WriteLine("TOS - Follow licenses on github/in Readme and don't do illegal stuff");
-                Console.WriteLine("Privacy policy - We collect no data, because I don't implement that");
-                Console.WriteLine("you can check the code to prove it");
-            }
-
             if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 Console.WriteLine("Game starting... (Press escape to exit)");
@@ -285,7 +278,6 @@ public class MyProgram {
                 Console.WriteLine("game - a small, fun, offline game");
                 Console.WriteLine("savepage + (url) - saves the page as a text file");
                 Console.WriteLine("readfile + (file) - reads a specified txt file");
-                Console.WriteLine("Legal - Random stuff like TOS/Privacy Policy");
             }
 
             storeInput = (input);
