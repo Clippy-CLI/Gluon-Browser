@@ -816,15 +816,13 @@ public class Player {
         return y;
     }
     public void changeX(int howMuch) {
-        if (!((x += howMuch) > 37) && !((x += howMuch) < 0)) {
+        if (!((x + howMuch) > 37) && !((x + howMuch) < 0)) {
         x += howMuch;
         }
     }
     public void changeY(int howMuch) {
-        if (y < 18 && y > 0) {
+        if (!((y + howMuch) > 18) && !((y + howMuch) < 0)) {
         y += howMuch;
-        } else {
-            y -= howMuch;
         }
     }
 }
