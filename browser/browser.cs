@@ -230,25 +230,6 @@ public class MyProgram {
                                 p.changeY(-1);
                             }
 
-                            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         }
                             int doesSpawnWall = Random.Shared.Next(60);
                             if (doesSpawnWall == 0) {
