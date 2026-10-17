@@ -165,6 +165,8 @@ public class MyProgram {
 
                         if (gameGrid[p.getX(), p.getY()] != 1) {
                         gameGrid[p.getX(), p.getY()] = 2;
+                        } else {
+                            running = false;
                         }
                         //automatically, player spot =2
 
