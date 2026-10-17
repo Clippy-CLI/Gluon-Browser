@@ -194,7 +194,7 @@ public class MyProgram {
                     }
 
                     Thread.Sleep(16);
-                    if ((approxFrame % 60) == 0) {
+                    if ((approxFrame % 30) == 0) {
                         methodWall.moveAllWalls();
                     }
                     approxFrame++;
