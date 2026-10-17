@@ -25,8 +25,7 @@ public class MyProgram {
         Console.WriteLine("Welcome to Gluon browser!");
         Console.WriteLine("Type help for a list of commands");
         Console.WriteLine("Type exit to quit");
-        Console.WriteLine("Made by Clippy-CLI");
-        Console.WriteLine();
+        Console.WriteLine("Made by Clippy-CLI" + "\n");
         string storeInput = ("");
         List<String> tabArray = new List<String>();
         while (true) {
