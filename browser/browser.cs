@@ -814,12 +814,12 @@ public class Player {
         return y;
     }
     public void changeX(int howMuch) {
-        if (x < 38 && x > 0) {
+        if (x < 37 && x > 0) {
         x += howMuch;
         }
     }
     public void changeY(int howMuch) {
-        if (y < 19 && y > 0) {
+        if (y < 18 && y > 0) {
         y += howMuch;
         }
     }
