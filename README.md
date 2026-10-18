@@ -22,7 +22,7 @@ exit: closes the browser
 previous: runs the previous command/website
 
 # Attribution
-Please provide attribution or credit to this repository if you use it! Follow License which as far as I know basically says you can use it but not sell it as well as to give some credit/attribution to the creator.
+This is licensed under Creative Commons Attribution‑NonCommercial 4.0 International (CC BY‑NC 4.0). You can use, distribute, and modify it or non commercial uses, but must provide attribtuion.
 
 Used the Sixlabors image library: This software uses SixLabors.ImageSharp, which is licensed under the Apache License, Version 2.0.
 A lot of this project was done for the Hackclub (https://hackclub.com/) Stardance event (https://stardance.hackclub.com/)
