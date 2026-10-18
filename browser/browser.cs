@@ -10,8 +10,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
-public class MyProgram {
-    public static async Task Main(string[] args) {
+public class MyProgram
+{
+    public static async Task Main(string[] args)
+    {
         Console.Clear();
         Console.WriteLine("    #######    ");
         Console.WriteLine("  ##       ##  ");
@@ -26,24 +28,29 @@ public class MyProgram {
         Console.WriteLine("Made by Clippy-CLI" + "\n");
         string storeInput = ("");
         List<String> tabArray = new List<String>();
-        while (true) {
+        while (true)
+        {
             Console.Write(">");
             string input = Console.ReadLine();
             bool handled = false;
-            
-            if (input == null || input.Equals("")) {
+
+            if (input == null || input.Equals(""))
+            {
                 handled = true;
             }
 
-            if (input.Equals("exit", StringComparison.OrdinalIgnoreCase)) {
+            if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
+            {
                 break;
             }
 
-            if (input.Equals("previous")) {
+            if (input.Equals("previous"))
+            {
                 input = storeInput;
             }
 
-            if (input.Equals("common")) {
+            if (input.Equals("common"))
+            {
                 handled = true;
                 Console.WriteLine("Common Webpages:");
 
@@ -54,81 +61,101 @@ public class MyProgram {
                 Console.WriteLine("");
             }
 
-            if (input.StartsWith("linkscan", StringComparison.OrdinalIgnoreCase)) {
+            if (input.StartsWith("linkscan", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
-                try {
+                try
+                {
                     string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
                     var getter = new GetLinks(urlPart, "");
                     string result = await getter.GetLinksFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result)) {
+                    if (string.IsNullOrWhiteSpace(result))
+                    {
                         Console.WriteLine("no links found");
                     }
-                    else {
+                    else
+                    {
                         Console.WriteLine(result);
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
-            if (input.StartsWith("images", StringComparison.OrdinalIgnoreCase)) {
+            if (input.StartsWith("images", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
-                try {
+                try
+                {
                     string urlPart = input.Length > 7 ? input.Substring(7).Trim() : string.Empty;
                     var getter = new GetImageLinks(urlPart, "");
                     string result = await getter.GetImageLinksFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result)) {
+                    if (string.IsNullOrWhiteSpace(result))
+                    {
                         Console.WriteLine("no images found");
                     }
-                    else {
+                    else
+                    {
                         Console.WriteLine(result);
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
 
-            if (input.StartsWith("image", StringComparison.OrdinalIgnoreCase)) {
+            if (input.StartsWith("image", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
-                try {
+                try
+                {
                     string urlPart = input.Length > 6 ? input.Substring(6).Trim() : string.Empty;
                     var getter = new GetImage(urlPart, "");
                     string result = await getter.GetImageFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result)) {
+                    if (string.IsNullOrWhiteSpace(result))
+                    {
                         Console.WriteLine("no images found");
                     }
-                    else {
+                    else
+                    {
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
 
-            if (input.Equals("tab", StringComparison.OrdinalIgnoreCase)) {
+            if (input.Equals("tab", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
                 Console.WriteLine(storeInput + "added as a tab");
                 tabArray.Add(storeInput);
             }
 
-            if (input.Equals("tabs", StringComparison.OrdinalIgnoreCase)) {
+            if (input.Equals("tabs", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
                 Console.WriteLine("Open Tabs:");
-                for (int i = 0; i < tabArray.Count; i++) {
+                for (int i = 0; i < tabArray.Count; i++)
+                {
                     Console.WriteLine(tabArray[i]);
                 }
             }
 
-            if (input.Equals("clear", StringComparison.OrdinalIgnoreCase)) {
+            if (input.Equals("clear", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
                 Console.Clear();
             }
 
-            if (input.Equals("game", StringComparison.OrdinalIgnoreCase)) {
+            if (input.Equals("game", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
                 Console.WriteLine("Game starting... (Press escape to exit)");
                 Console.WriteLine("Use arrow keys to move *, avoid !");
@@ -140,21 +167,27 @@ public class MyProgram {
 
                 int counterWalls = 0;
                 int approxFrame = 0;
-                while (running) {
+                while (running)
+                {
                     Console.CursorVisible = false;
                     int[,] gameGrid = new int[38, 19];
                     methodWall.fillArrayWithPositions(gameGrid);
 
-                    if (gameGrid[p.getX(), p.getY()] != 1) {
+                    if (gameGrid[p.getX(), p.getY()] != 1)
+                    {
                         gameGrid[p.getX(), p.getY()] = 2;
                     }
-                    else {
+                    else
+                    {
                         running = false;
                     }
 
-                    for (int gridX = 0; gridX < 38; gridX++) {
-                        for (int gridY = 0; gridY < 19; gridY++) {
-                            if (gameGrid[gridX, gridY] != 1 && gameGrid[gridX, gridY] != 2) {
+                    for (int gridX = 0; gridX < 38; gridX++)
+                    {
+                        for (int gridY = 0; gridY < 19; gridY++)
+                        {
+                            if (gameGrid[gridX, gridY] != 1 && gameGrid[gridX, gridY] != 2)
+                            {
                                 gameGrid[gridX, gridY] = 0;
                             }
                         }
@@ -163,33 +196,41 @@ public class MyProgram {
 
 
 
-                    if (Console.KeyAvailable) {
+                    if (Console.KeyAvailable)
+                    {
                         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
-                        if (keyInfo.Key == ConsoleKey.Escape) {
+                        if (keyInfo.Key == ConsoleKey.Escape)
+                        {
                             running = false;
                         }
-                        if (keyInfo.Key == ConsoleKey.RightArrow) {
+                        if (keyInfo.Key == ConsoleKey.RightArrow)
+                        {
                             p.changeX(1);
                         }
-                        if (keyInfo.Key == ConsoleKey.LeftArrow) {
+                        if (keyInfo.Key == ConsoleKey.LeftArrow)
+                        {
                             p.changeX(-1);
                         }
-                        if (keyInfo.Key == ConsoleKey.UpArrow) {
+                        if (keyInfo.Key == ConsoleKey.UpArrow)
+                        {
                             p.changeY(1);
                         }
-                        if (keyInfo.Key == ConsoleKey.DownArrow) {
+                        if (keyInfo.Key == ConsoleKey.DownArrow)
+                        {
                             p.changeY(-1);
                         }
                     }
                     int doesSpawnWall = Random.Shared.Next(60);
-                    if (doesSpawnWall == 0) {
+                    if (doesSpawnWall == 0)
+                    {
                         Wall idkWallName = new Wall();
                         counterWalls++;
                     }
 
                     Thread.Sleep(16);
-                    if ((approxFrame % 30) == 0) {
+                    if ((approxFrame % 30) == 0)
+                    {
                         methodWall.moveAllWalls();
                     }
                     approxFrame++;
@@ -202,20 +243,26 @@ public class MyProgram {
                     for (int i = 0; i < 40; i++) Console.Write("#");
                     Console.Write("\n");
 
-                    for (int drawY = 18; drawY >= 0; drawY--) {
+                    for (int drawY = 18; drawY >= 0; drawY--)
+                    {
                         Console.Write("#");
 
-                        for (int drawX = 0; drawX < 38; drawX++) {
-                            if (gameGrid[drawX, drawY] == 0) {
+                        for (int drawX = 0; drawX < 38; drawX++)
+                        {
+                            if (gameGrid[drawX, drawY] == 0)
+                            {
                                 Console.Write(" ");
                             }
-                            else if (gameGrid[drawX, drawY] == 1) {
+                            else if (gameGrid[drawX, drawY] == 1)
+                            {
                                 Console.Write("!");
                             }
-                            else if (gameGrid[drawX, drawY] == 2) {
+                            else if (gameGrid[drawX, drawY] == 2)
+                            {
                                 Console.Write("*");
                             }
-                            else {
+                            else
+                            {
                                 Console.Write("?");
                             }
                         }
@@ -233,41 +280,50 @@ public class MyProgram {
                 Console.CursorVisible = true;
             }
 
-            if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase)) {
+            if (input.StartsWith("savepage", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
-                try {
+                try
+                {
                     string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
                     var getter = new GetData(urlPart, "");
                     string result = await getter.GetDataFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result)) {
+                    if (string.IsNullOrWhiteSpace(result))
+                    {
                         Console.WriteLine("no links found");
                     }
-                    else {
+                    else
+                    {
                         File.WriteAllText("savedSite.txt", result);
                         Console.WriteLine("Page saved as savedSite.txt");
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
 
-            if (input.StartsWith("readfile", StringComparison.OrdinalIgnoreCase)) {
+            if (input.StartsWith("readfile", StringComparison.OrdinalIgnoreCase))
+            {
                 handled = true;
                 string filePath = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
-                try {
+                try
+                {
                     string fileText = File.ReadAllText(filePath);
                     Console.WriteLine(fileText);
                     Console.WriteLine("File contents displayed successfully");
                 }
-                catch (IOException e) {
+                catch (IOException e)
+                {
                     Console.WriteLine($"An error occurred while reading the file:  {e.Message}");
                 }
 
             }
 
-            if (input.Equals("help")) {
+            if (input.Equals("help"))
+            {
                 handled = true;
                 Console.WriteLine("exit - Closes the program");
                 Console.WriteLine("previous - Runs the previous command/url");
@@ -284,23 +340,29 @@ public class MyProgram {
             }
 
             storeInput = (input);
-            if (!handled) {
-                try {
+            if (!handled)
+            {
+                try
+                {
                     var getter = new GetData(input, "");
                     string result = await getter.GetDataFromSiteAsync();
 
-                    if (string.IsNullOrWhiteSpace(result)) {
+                    if (string.IsNullOrWhiteSpace(result))
+                    {
                         Console.WriteLine("(no readable <p> content found)");
                     }
-                    else {
+                    else
+                    {
                         var lines = Regex.Split(result, "\r?\n");
-                        foreach (var line in lines) {
+                        foreach (var line in lines)
+                        {
                             var t = line.Trim();
                             if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
                         }
                     }
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
@@ -310,19 +372,23 @@ public class MyProgram {
     }
 }
 
-public class GetData {
+public class GetData
+{
     private readonly string chooseURL;
     private readonly string recievePart;
 
-    public GetData(string pickURL, string parameter) {
+    public GetData(string pickURL, string parameter)
+    {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
-    public async Task<string> GetDataFromSiteAsync() {
+    public async Task<string> GetDataFromSiteAsync()
+    {
         string recievedData = string.Empty;
 
-        try {
+        try
+        {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
@@ -332,35 +398,43 @@ public class GetData {
             var response = await client.GetAsync(chooseURL);
             recievedData = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode) {
-                if ((int)response.StatusCode == 403) {
+            if (!response.IsSuccessStatusCode)
+            {
+                if ((int)response.StatusCode == 403)
+                {
                     return "Http 403, request rejected (Error Detected as bot/blocked traffic";
                 }
 
-                if (string.IsNullOrEmpty(recievedData)) {
+                if (string.IsNullOrEmpty(recievedData))
+                {
                     return "Error loading website (Error No Content Recieved From Site)";
                 }
 
                 return "An error has occured, check the URL and try again (Error Site not found";
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Console.WriteLine("Looks bad: " + e);
             var eString = e.ToString();
-            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1) {
+            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1)
+            {
                 return "Http 403, request rejected (Error Code: yg7f63g)";
             }
-            else if (string.IsNullOrEmpty(recievedData)) {
+            else if (string.IsNullOrEmpty(recievedData))
+            {
                 return "Error loading website (Error Code: d3y7g3)";
             }
-            else {
+            else
+            {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
         var recievedNew = new StringBuilder();
         string work = recievedData;
 
-        while (true) {
+        while (true)
+        {
             int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
 
@@ -370,7 +444,8 @@ public class GetData {
 
             work = work.Substring(gt + 1);
             int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
-            if (endP == -1) {
+            if (endP == -1)
+            {
                 recievedNew.Append(work);
                 break;
             }
@@ -387,13 +462,16 @@ public class GetData {
 
         var sb = new StringBuilder();
         bool inTag = false;
-        for (int i = 0; i < cleaned.Length; i++) {
+        for (int i = 0; i < cleaned.Length; i++)
+        {
             char c = cleaned[i];
-            if (!inTag) {
+            if (!inTag)
+            {
                 if (c == '<') { inTag = true; if (sb.Length > 0 && !char.IsWhiteSpace(sb[sb.Length - 1])) sb.Append(' '); }
                 else sb.Append(c);
             }
-            else {
+            else
+            {
                 if (c == '>') inTag = false;
             }
         }
@@ -405,20 +483,24 @@ public class GetData {
     }
 }
 
-public class GetLinks {
+public class GetLinks
+{
     private readonly string chooseURL;
     private readonly string recievePart;
     List<String> linkArray = new List<String>();
 
-    public GetLinks(string pickURL, string parameter) {
+    public GetLinks(string pickURL, string parameter)
+    {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
-    public async Task<string> GetLinksFromSiteAsync() {
+    public async Task<string> GetLinksFromSiteAsync()
+    {
         string recievedData = string.Empty;
 
-        try {
+        try
+        {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
@@ -428,35 +510,43 @@ public class GetLinks {
             var response = await client.GetAsync(chooseURL);
             recievedData = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode) {
-                if ((int)response.StatusCode == 403) {
+            if (!response.IsSuccessStatusCode)
+            {
+                if ((int)response.StatusCode == 403)
+                {
                     return "Http 403, request rejected (Error Detected as bot/blocked traffic";
                 }
 
-                if (string.IsNullOrEmpty(recievedData)) {
+                if (string.IsNullOrEmpty(recievedData))
+                {
                     return "Error loading website (Error No Content Recieved From Site)";
                 }
 
                 return "An error has occured, check the URL and try again (Error Site not found";
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Console.WriteLine("Looks bad: " + e);
             var eString = e.ToString();
-            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1) {
+            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1)
+            {
                 return "Http 403, request rejected (Error Code: yg7f63g)";
             }
-            else if (string.IsNullOrEmpty(recievedData)) {
+            else if (string.IsNullOrEmpty(recievedData))
+            {
                 return "Error loading website (Error Code: d3y7g3)";
             }
-            else {
+            else
+            {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
         var recievedNew = new StringBuilder();
         string work = recievedData;
 
-        while (true) {
+        while (true)
+        {
 
             int start = work.IndexOf("href", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
@@ -469,7 +559,8 @@ public class GetLinks {
             work = work.Substring(gt + 1);
 
             int endP = work.IndexOf('"');
-            if (endP == -1) {
+            if (endP == -1)
+            {
 
                 break;
             }
@@ -479,7 +570,8 @@ public class GetLinks {
         }
 
         var decodedSb = new StringBuilder();
-        for (int indexCount = 0; indexCount < linkArray.Count; indexCount++) {
+        for (int indexCount = 0; indexCount < linkArray.Count; indexCount++)
+        {
 
             decodedSb.Append(linkArray[indexCount]);
 
@@ -492,21 +584,25 @@ public class GetLinks {
 }
 
 
-public class GetImageLinks {
+public class GetImageLinks
+{
     private readonly string chooseURL;
     private readonly string recievePart;
 
     List<String> linkArray = new List<String>();
 
-    public GetImageLinks(string pickURL, string parameter) {
+    public GetImageLinks(string pickURL, string parameter)
+    {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
-    public async Task<string> GetImageLinksFromSiteAsync() {
+    public async Task<string> GetImageLinksFromSiteAsync()
+    {
         string recievedData = ("");
 
-        try {
+        try
+        {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
@@ -516,28 +612,35 @@ public class GetImageLinks {
             var response = await client.GetAsync(chooseURL);
             recievedData = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode) {
-                if ((int)response.StatusCode == 403) {
+            if (!response.IsSuccessStatusCode)
+            {
+                if ((int)response.StatusCode == 403)
+                {
                     return "Http 403, request rejected (Error Detected as bot/blocked traffic";
                 }
 
-                if (string.IsNullOrEmpty(recievedData)) {
+                if (string.IsNullOrEmpty(recievedData))
+                {
                     return "Error loading website (Error No Content Recieved From Site)";
                 }
 
                 return "An error has occured, check the URL and try again (Error Site not found";
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Console.WriteLine("Looks bad: " + e);
             var eString = e.ToString();
-            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1) {
+            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1)
+            {
                 return "Http 403, request rejected (Error Code: yg7f63g)";
             }
-            else if (string.IsNullOrEmpty(recievedData)) {
+            else if (string.IsNullOrEmpty(recievedData))
+            {
                 return "Error loading website (Error Code: d3y7g3)";
             }
-            else {
+            else
+            {
                 return "An error has occured, check the URL and try again (Error Code: v7d332)";
             }
         }
@@ -545,7 +648,8 @@ public class GetImageLinks {
 
         var recievedNew = new StringBuilder();
         string work = recievedData;
-        while (true) {
+        while (true)
+        {
 
 
             int start = work.IndexOf("src=", StringComparison.OrdinalIgnoreCase);
@@ -560,7 +664,8 @@ public class GetImageLinks {
 
             int endP = work.IndexOf("\"", StringComparison.OrdinalIgnoreCase);
 
-            if (endP == -1) {
+            if (endP == -1)
+            {
 
 
                 break;
@@ -573,35 +678,47 @@ public class GetImageLinks {
             string linkToAdd = work.Substring(0, endP);
 
             string linkToAddExtension = linkToAdd.Length >= 4 ? linkToAdd.Substring(linkToAdd.Length - 4) : linkToAdd;
-            if (linkToAddExtension.Equals(".png")) {
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
+            if (linkToAddExtension.Equals(".png"))
+            {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
+                {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else {
+                else
+                {
                     linkArray.Add(linkToAdd);
                 }
             }
-            else if (linkToAddExtension.Equals("jpeg")) {
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
+            else if (linkToAddExtension.Equals("jpeg"))
+            {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
+                {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else {
+                else
+                {
                     linkArray.Add(linkToAdd);
                 }
             }
-            else if (linkToAddExtension.Equals(".jpg")) {
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
+            else if (linkToAddExtension.Equals(".jpg"))
+            {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
+                {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else {
+                else
+                {
                     linkArray.Add(linkToAdd);
                 }
             }
-            else if (linkToAddExtension.Equals("webp")) {
-                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http")) {
+            else if (linkToAddExtension.Equals("webp"))
+            {
+                if ((linkToAdd.Length < 5) || !linkToAdd.Substring(0, 4).Equals("http"))
+                {
                     linkArray.Add(chooseURL + linkToAdd);
                 }
-                else {
+                else
+                {
                     linkArray.Add(linkToAdd);
                 }
             }
@@ -609,7 +726,8 @@ public class GetImageLinks {
 
 
         var decoded = new StringBuilder();
-        for (int i = 0; i < linkArray.Count; i++) {
+        for (int i = 0; i < linkArray.Count; i++)
+        {
             using var imageClient = new HttpClient();
             imageClient.DefaultRequestHeaders.UserAgent.ParseAdd("Gluon-Browser");
             imageClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
@@ -636,8 +754,10 @@ public class GetImageLinks {
             char[] asciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
             var asciiBuilder = new StringBuilder();
 
-            for (int y = 0; y < resized.Height; y++) {
-                for (int x = 0; x < resized.Width; x++) {
+            for (int y = 0; y < resized.Height; y++)
+            {
+                for (int x = 0; x < resized.Width; x++)
+                {
                     SKColor pixel = resized.GetPixel(x, y);
                     double luminance =
                         0.2126 * pixel.Red +
@@ -669,153 +789,181 @@ public class GetImageLinks {
 
 
 
-public class GetImage {
+public class GetImage
+{
     private readonly string chooseURL;
     private readonly string recievePart;
 
-    public GetImage(string pickURL, string parameter) {
+    public GetImage(string pickURL, string parameter)
+    {
         chooseURL = pickURL;
         recievePart = parameter;
     }
 
     public async Task<string> GetImageFromSiteAsync()
-{
-    using var imageClient = new HttpClient();
-    imageClient.DefaultRequestHeaders.UserAgent.ParseAdd("Gluon-Browser");
-    imageClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
-    imageClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.9");
-
-    using Stream streamImage = await imageClient.GetStreamAsync(chooseURL);
-    using var memoryStream = new MemoryStream();
-    await streamImage.CopyToAsync(memoryStream);
-
-    using var bitmap = SKBitmap.Decode(memoryStream.ToArray())
-        ?? throw new InvalidDataException("Could not decode image.");
-
-    const int terminalWidth = 80;
-    int targetHeight = Math.Max(
-        1,
-        (int)(bitmap.Height / (double)bitmap.Width
-            * terminalWidth * 0.5));
-
-    using var resized = bitmap.Resize(
-        new SKImageInfo(terminalWidth, targetHeight),
-        new SKSamplingOptions(SKFilterMode.Linear))
-        ?? throw new InvalidDataException("Could not resize image.");
-
-    char[] asciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
-    var asciiBuilder = new StringBuilder();
-
-    for (int y = 0; y < resized.Height; y++)
     {
-        for (int x = 0; x < resized.Width; x++)
+        using var imageClient = new HttpClient();
+        imageClient.DefaultRequestHeaders.UserAgent.ParseAdd("Gluon-Browser");
+        imageClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
+        imageClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.9");
+
+        using Stream streamImage = await imageClient.GetStreamAsync(chooseURL);
+        using var memoryStream = new MemoryStream();
+        await streamImage.CopyToAsync(memoryStream);
+
+        using var bitmap = SKBitmap.Decode(memoryStream.ToArray())
+            ?? throw new InvalidDataException("Could not decode image.");
+
+        const int terminalWidth = 80;
+        int targetHeight = Math.Max(
+            1,
+            (int)(bitmap.Height / (double)bitmap.Width
+                * terminalWidth * 0.5));
+
+        using var resized = bitmap.Resize(
+            new SKImageInfo(terminalWidth, targetHeight),
+            new SKSamplingOptions(SKFilterMode.Linear))
+            ?? throw new InvalidDataException("Could not resize image.");
+
+        char[] asciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+        var asciiBuilder = new StringBuilder();
+
+        for (int y = 0; y < resized.Height; y++)
         {
-            SKColor pixel = resized.GetPixel(x, y);
+            for (int x = 0; x < resized.Width; x++)
+            {
+                SKColor pixel = resized.GetPixel(x, y);
 
-            double luminance =
-                0.2126 * pixel.Red +
-                0.7152 * pixel.Green +
-                0.0722 * pixel.Blue;
+                double luminance =
+                    0.2126 * pixel.Red +
+                    0.7152 * pixel.Green +
+                    0.0722 * pixel.Blue;
 
-            int rampIndex = (int)(
-                luminance / 255.0 * (asciiRamp.Length - 1));
+                int rampIndex = (int)(
+                    luminance / 255.0 * (asciiRamp.Length - 1));
 
-            asciiBuilder.Append(asciiRamp[rampIndex]);
+                asciiBuilder.Append(asciiRamp[rampIndex]);
+            }
+
+            asciiBuilder.AppendLine();
         }
 
-        asciiBuilder.AppendLine();
+        string decoded = asciiBuilder.ToString();
+        Console.WriteLine(decoded);
+        return decoded;
     }
-
-    string decoded = asciiBuilder.ToString();
-    Console.WriteLine(decoded);
-    return decoded;
-}
 }
 
-public class Player {
+public class Player
+{
     private int x;
     private int y;
 
-    public Player() {
+    public Player()
+    {
         x = 19;
         y = 10;
     }
-    public int getX() {
+    public int getX()
+    {
         return x;
     }
-    public int getY() {
+    public int getY()
+    {
         return y;
     }
-    public void changeX(int howMuch) {
-        if (!((x + howMuch) > 37) && !((x + howMuch) < 0)) {
+    public void changeX(int howMuch)
+    {
+        if (!((x + howMuch) > 37) && !((x + howMuch) < 0))
+        {
             x += howMuch;
         }
     }
-    public void changeY(int howMuch) {
-        if (!((y + howMuch) > 18) && !((y + howMuch) < 0)) {
+    public void changeY(int howMuch)
+    {
+        if (!((y + howMuch) > 18) && !((y + howMuch) < 0))
+        {
             y += howMuch;
         }
     }
 }
-public class Wall {
+public class Wall
+{
     public static List<Wall> Walls = new List<Wall>();
     private int x;
     private static int score;
     private int y;
     private int direction;
     //0 = up, 1 = right, 2, down, 3 left
-    public void moveAllWalls() {
-        foreach (Wall thisWall in Walls) {
-            if (thisWall.direction == 0) {
+    public void moveAllWalls()
+    {
+        foreach (Wall thisWall in Walls)
+        {
+            if (thisWall.direction == 0)
+            {
                 thisWall.y += 1;
             }
-            else if (thisWall.direction == 1) {
+            else if (thisWall.direction == 1)
+            {
                 thisWall.x += 1;
             }
-            else if (thisWall.direction == 2) {
+            else if (thisWall.direction == 2)
+            {
                 thisWall.y -= 1;
             }
-            else if (thisWall.direction == 3) {
+            else if (thisWall.direction == 3)
+            {
                 thisWall.x -= 1;
             }
         }
     }
-    public int getScore() {
+    public int getScore()
+    {
         return score;
     }
 
-    public int getX() {
+    public int getX()
+    {
         return x;
     }
-    public int getY() {
+    public int getY()
+    {
         return y;
     }
-    public void fillArrayWithPositions(int[,] fillArray) {
-        foreach (Wall getPos in Walls) {
-            if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 19) {
+    public void fillArrayWithPositions(int[,] fillArray)
+    {
+        foreach (Wall getPos in Walls)
+        {
+            if (getPos.getX() > 0 && getPos.getX() < 38 && getPos.getY() > 0 && getPos.getY() < 19)
+            {
                 fillArray[getPos.getX(), getPos.getY()] = 1;
             }
         }
     }
 
-    public Wall() {
+    public Wall()
+    {
         int half = Random.Shared.Next(4);
-        if (half == 0) {
+        if (half == 0)
+        {
             direction = 0;
             x = Random.Shared.Next(38);
             y = 0;
         }
-        else if (half == 1) {
+        else if (half == 1)
+        {
             direction = 1;
             y = Random.Shared.Next(19);
             x = 0;
         }
-        else if (half == 2) {
+        else if (half == 2)
+        {
             direction = 2;
             y = 19;
             x = Random.Shared.Next(38);
         }
-        else if (half == 3) {
+        else if (half == 3)
+        {
             direction = 3;
             y = Random.Shared.Next(19);
             x = 38;
@@ -823,18 +971,22 @@ public class Wall {
         score++;
         Walls.Add(this);
     }
-    public Boolean checkIfTouchingPlayer(Player checkPlayer) {
+    public Boolean checkIfTouchingPlayer(Player checkPlayer)
+    {
         int playerX = checkPlayer.getX();
         int playerY = checkPlayer.getY();
-        foreach (Wall thisWall in Walls) {
-            if ((thisWall.x == playerX) && (thisWall.y == playerY)) {
+        foreach (Wall thisWall in Walls)
+        {
+            if ((thisWall.x == playerX) && (thisWall.y == playerY))
+            {
                 return true;
             }
         }
         return false;
     }
 
-    public void clearAllWalls() {
+    public void clearAllWalls()
+    {
         Walls.Clear();
     }
 }
