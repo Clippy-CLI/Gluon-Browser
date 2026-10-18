@@ -833,7 +833,7 @@ public class Wall {
         }
         else if (half == 2) {
             direction = 2;
-            y = 38;
+            y = 19;
             x = Random.Shared.Next(38);
         }
         else if (half == 3) {
