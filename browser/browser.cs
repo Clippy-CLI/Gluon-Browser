@@ -32,8 +32,12 @@ public class MyProgram {
             Console.Write(">");
             string input = Console.ReadLine();
             bool handled = false;
+            
+            if (input == null || input.Equals("")) {
+                handled = true;
+            }
 
-            if (input == null || input.Equals("exit", StringComparison.OrdinalIgnoreCase)) {
+            if (input.Equals("exit", StringComparison.OrdinalIgnoreCase)) {
                 break;
             }
 
