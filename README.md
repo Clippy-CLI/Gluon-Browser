@@ -3,26 +3,26 @@ A simple, lightweight, fast, and secure browser that runs from the command line!
 ![GIF Of Browser Working](browserworking.gif)
 
 # About/Features
-It is a web browser that runs quickly and can be used to browse the web efficiently. It has many useful features such as tabs, saving pages for offline, and even a built-in game if you want something to spend time on!
+It is a web browser that runs fast and can be used to browse the web efficiently. It has many useful features such as tabs, saving pages for offline viewing, and even a built-in game if you want something to spend time on!
 
 # Game
-Includes a fun built in game where you must move to avoid incoming walls, can be quite fun to play for awhile. It was based on one of my first ever games.
+This browser includes a fun built-in game where you must move to avoid incoming walls, which is quite fun to play. It was based on one of my first games.
 ![Game Screenshot](gameImage.png)
 
-# How To Use
-You have 2 options to run the software: 
+# How to Use
+You have two options to run the software: 
 1. Use this link: (PUT DEMO LINK HERE ONCE COMPLETE) to run it inside of a browser, so that you do not need to download anything to try it!
-2. Download the code as a zip and compile it yourself (downloadable builds coming soon)
+2. Download the source code as a ZIP file and compile it yourself (downloadable builds coming soon)
 
-Simply type a full url (ie: https://simple.wikipedia.org/wiki/computer) and press enter, it will bring up the webpage ready for you to read!
-You should also use the commands to improve your experience and use all of the features besides reading pages! (Type "help" while running the program for a list of commands).
+Simply type a full URL (e.g. https://simple.wikipedia.org/wiki/computer), press Enter, and the webpage will load, ready to read!
+You should also use the commands to improve your experience and use all of the features available! (Type "help" while running the program for a list of commands).
 
 Commands:
 exit: closes the browser
 previous: runs the previous command/website
 
 # Attribution
-This is licensed under Creative Commons Attribution‑NonCommercial 4.0 International (CC BY‑NC 4.0). You can use, distribute, and modify it or non commercial uses, but must provide attribtuion.
+This is licensed under Creative Commons Attribution‑NonCommercial 4.0 International (CC BY‑NC 4.0). You can use, distribute, and modify it for non-commercial purposes, but must provide attribution.
 
-Used the Sixlabors image library: This software uses SixLabors.ImageSharp, which is licensed under the Apache License, Version 2.0.
-A lot of this project was done for the Hackclub (https://hackclub.com/) Stardance event (https://stardance.hackclub.com/)
+This software uses SixLabors.ImageSharp, which is licensed under the Apache License, Version 2.0.
+Much of this project was developed for the Hack Club (https://hackclub.com/) Stardance event (https://stardance.hackclub.com/)
