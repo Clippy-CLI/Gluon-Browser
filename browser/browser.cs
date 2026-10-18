@@ -1,11 +1,9 @@
 //Gluon Browser by Clippy-CLI (Github)
-using SixLabors.ImageSharp;
+using SkiaSharp;
 using System.IO;
-using SixLabors.ImageSharp.Processing;
 using System;
 using System.Net.Http;
 using System.Text;
-using SixLabors.ImageSharp.PixelFormats;
 using System.Threading.Tasks;
 using System.Net;
 using System.Linq;
@@ -610,64 +608,55 @@ public class GetImageLinks {
         }
 
 
-        string decoded = ("");
+        var decoded = new StringBuilder();
         for (int i = 0; i < linkArray.Count; i++) {
-
             using var imageClient = new HttpClient();
-            imageClient.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
+            imageClient.DefaultRequestHeaders.UserAgent.ParseAdd("Gluon-Browser");
             imageClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
-            imageClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
-            imageClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            imageClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.9");
 
+            using Stream streamImage = await imageClient.GetStreamAsync(linkArray[i]);
+            using var memoryStream = new MemoryStream();
+            await streamImage.CopyToAsync(memoryStream);
 
-            using (Stream streamImage = await imageClient.GetStreamAsync(linkArray[i])) {
-                using (Image image = await Image.LoadAsync(streamImage)) {
+            using var bitmap = SKBitmap.Decode(memoryStream.ToArray())
+                ?? throw new InvalidDataException("Could not decode image.");
 
-                    char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+            const int terminalWidth = 80;
+            int targetHeight = Math.Max(
+                1,
+                (int)(bitmap.Height / (double)bitmap.Width
+                    * terminalWidth * 0.5));
 
+            using var resized = bitmap.Resize(
+                new SKImageInfo(terminalWidth, targetHeight),
+                new SKSamplingOptions(SKFilterMode.Linear))
+                ?? throw new InvalidDataException("Could not resize image.");
 
+            char[] asciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+            var asciiBuilder = new StringBuilder();
 
-                    using Image<Rgb24> imageToPrint = image.CloneAs<Rgb24>();
-                    int width = imageToPrint.Width;
-                    int height = imageToPrint.Height;
-                    int targetWidth = 80;
-                    double aspectRadio = (double)imageToPrint.Height / imageToPrint.Width;
-                    int targetHeight = (int)(targetWidth * aspectRadio * 0.5);
+            for (int y = 0; y < resized.Height; y++) {
+                for (int x = 0; x < resized.Width; x++) {
+                    SKColor pixel = resized.GetPixel(x, y);
+                    double luminance =
+                        0.2126 * pixel.Red +
+                        0.7152 * pixel.Green +
+                        0.0722 * pixel.Blue;
 
-
-                    imageToPrint.Mutate(ctx => ctx.Resize(targetWidth, targetHeight));
-
-                    var asciiBuilder = new StringBuilder();
-
-                    imageToPrint.ProcessPixelRows(accessor => {
-                        for (int y = 0; y < accessor.Height; y++) {
-                            Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
-
-                            for (int x = 0; x < pixelRow.Length; x++) {
-                                Rgb24 pixel = pixelRow[x];
-
-                                double luminance = (0.2126 * pixel.R) + (0.7152 * pixel.G) + (0.0722 * pixel.B);
-
-                                int rampIndex = (int)(luminance / 255.0 * (AsciiRamp.Length - 1));
-
-                                asciiBuilder.Append(AsciiRamp[rampIndex]);
-                            }
-
-                            asciiBuilder.AppendLine();
-                        }
-                    });
-
-                    decoded = (decoded + asciiBuilder.ToString());
-                    decoded = (decoded + "\n");
-                    decoded = (decoded + "\n");
-                    decoded = (decoded + "\n");
+                    int rampIndex = (int)(
+                        luminance / 255.0 * (asciiRamp.Length - 1));
+                    asciiBuilder.Append(asciiRamp[rampIndex]);
                 }
+
+                asciiBuilder.AppendLine();
             }
 
-
-
+            decoded.Append(asciiBuilder);
+            decoded.AppendLine();
         }
-        return decoded;
+
+        return decoded.ToString();
     }
 }
 
@@ -689,68 +678,58 @@ public class GetImage {
         recievePart = parameter;
     }
 
-    public async Task<string> GetImageFromSiteAsync() {
-        try {
-            using var imageClient = new HttpClient();
-            imageClient.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
-            imageClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
-            imageClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
-            imageClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            using (Stream streamImage = await imageClient.GetStreamAsync(chooseURL)) {
-                using (Image image = await Image.LoadAsync(streamImage)) {
-                    String decoded = ("");
+    public async Task<string> GetImageFromSiteAsync()
+{
+    using var imageClient = new HttpClient();
+    imageClient.DefaultRequestHeaders.UserAgent.ParseAdd("Gluon-Browser");
+    imageClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
+    imageClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.9");
 
+    using Stream streamImage = await imageClient.GetStreamAsync(chooseURL);
+    using var memoryStream = new MemoryStream();
+    await streamImage.CopyToAsync(memoryStream);
 
+    using var bitmap = SKBitmap.Decode(memoryStream.ToArray())
+        ?? throw new InvalidDataException("Could not decode image.");
 
-                    char[] AsciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+    const int terminalWidth = 80;
+    int targetHeight = Math.Max(
+        1,
+        (int)(bitmap.Height / (double)bitmap.Width
+            * terminalWidth * 0.5));
 
+    using var resized = bitmap.Resize(
+        new SKImageInfo(terminalWidth, targetHeight),
+        new SKSamplingOptions(SKFilterMode.Linear))
+        ?? throw new InvalidDataException("Could not resize image.");
 
+    char[] asciiRamp = { ' ', '.', ':', '-', '=', '+', '*', '%', '@', '#' };
+    var asciiBuilder = new StringBuilder();
 
-                    using Image<Rgb24> imageToPrint = image.CloneAs<Rgb24>();
-                    int width = imageToPrint.Width;
-                    int height = imageToPrint.Height;
-                    int terminalWidth = 80;
+    for (int y = 0; y < resized.Height; y++)
+    {
+        for (int x = 0; x < resized.Width; x++)
+        {
+            SKColor pixel = resized.GetPixel(x, y);
 
-                    double aspectRadio = (double)imageToPrint.Height / imageToPrint.Width;
-                    int targetHeight = (int)(terminalWidth * aspectRadio * 0.5);
+            double luminance =
+                0.2126 * pixel.Red +
+                0.7152 * pixel.Green +
+                0.0722 * pixel.Blue;
 
-                    imageToPrint.Mutate(ctx => ctx.Resize(terminalWidth, targetHeight));
+            int rampIndex = (int)(
+                luminance / 255.0 * (asciiRamp.Length - 1));
 
-                    var asciiBuilder = new StringBuilder();
-
-                    imageToPrint.ProcessPixelRows(accessor => {
-                        for (int y = 0; y < accessor.Height; y++) {
-                            Span<Rgb24> pixelRow = accessor.GetRowSpan(y);
-
-                            for (int x = 0; x < pixelRow.Length; x++) {
-                                Rgb24 pixel = pixelRow[x];
-
-
-                                double luminance = (0.2126 * pixel.R) + (0.7152 * pixel.G) + (0.0722 * pixel.B);
-
-
-                                int rampIndex = (int)(luminance / 255.0 * (AsciiRamp.Length - 1));
-
-                                asciiBuilder.Append(AsciiRamp[rampIndex]);
-                            }
-
-
-                            asciiBuilder.AppendLine();
-                        }
-                    });
-                    Console.WriteLine(asciiBuilder);
-                    decoded = (decoded + asciiBuilder.ToString());
-                    return decoded;
-                }
-            }
-
-
-
+            asciiBuilder.Append(asciiRamp[rampIndex]);
         }
-        catch {
-            return ("Umm something happened");
-        }
+
+        asciiBuilder.AppendLine();
     }
+
+    string decoded = asciiBuilder.ToString();
+    Console.WriteLine(decoded);
+    return decoded;
+}
 }
 
 public class Player {

@@ -24,5 +24,5 @@ previous: runs the previous command/website
 # Attribution
 This is licensed under Creative Commons Attribution‑NonCommercial 4.0 International (CC BY‑NC 4.0). You can use, distribute, and modify it for non-commercial purposes, but must provide attribution.
 
-This software uses SixLabors.ImageSharp, which is licensed under the Apache License, Version 2.0.
+This software uses SkiaSharp, which is licensed under the MIT License.
 Much of this project was developed for the Hack Club (https://hackclub.com/) Stardance event (https://stardance.hackclub.com/)
