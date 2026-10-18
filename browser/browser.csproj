@@ -7,7 +7,6 @@
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
     <PackAsTool>true</PackAsTool>
-    <UserSecretsId>browser-13e01cd815b87959bdc8688e7da2470007f7b2770873671d289b011ae778bbdd</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
