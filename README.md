@@ -10,9 +10,14 @@ This browser includes a fun built-in game where you must move to avoid incoming 
 ![Game Screenshot](gameImage.png)
 
 # How to Use
-You have two options to run the software: 
-1. Use this link: (PUT DEMO LINK HERE ONCE COMPLETE) to run it inside of a browser, so that you do not need to download anything to try it! Also is useful if there are issues running the program locally (such as issues pertaining to AV or dependencies).
-2. Download the ZIP file for Windows and run the included EXE file, Linux support will be coming soon.
+To run the software:
+1. Download the ZIP file in the release
+2. There should be 2 files, a .exe and a .dll
+3. Run the .exe to run the program. Linux support will be coming soon
+Alternatively:
+1. On the github page, click the green button that says "<> Code" 
+2. Download ZIP
+3. Compile the code yourself
 
 Simply type a full URL (e.g. https://simple.wikipedia.org/wiki/computer), press Enter, and the webpage will load, ready to read!
 You should also use the commands to improve your experience and use all of the features available! (Type "help" while running the program for a list of commands).
