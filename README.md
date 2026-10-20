@@ -11,9 +11,9 @@ This browser includes a fun built-in game where you must move to avoid incoming 
 
 # How to Use
 To run the software:
-1. Download the ZIP file in the release
-2. There should be 2 files, a .exe and a .dll
-3. Run the .exe to run the program. Linux support will be coming soon
+1. Download the ZIP file in the release section.
+2. There should be 2 files, one is the SkiaSharp library (.dll), and the other is the runnable file (.exe).
+3. Run the the .exe file.
 Alternatively:
 1. On the github page, click the green button that says "<> Code" 
 2. Download ZIP
