@@ -22,7 +22,7 @@ exit: closes the browser
 previous: runs the previous command/website
 
 # Attribution
-This is licensed under Creative Commons Attribution‑NonCommercial 4.0 International (CC BY‑NC 4.0). You can use, distribute, and modify it for non-commercial purposes, but must provide attribution.
+This is licensed under the MIT License, 2026 by Clippy-CLI
 
 This software uses SkiaSharp, which is licensed under the MIT License.
 Much of this project was developed for the Hack Club (https://hackclub.com/) Stardance event (https://stardance.hackclub.com/)
