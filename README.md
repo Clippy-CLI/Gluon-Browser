@@ -11,13 +11,16 @@ This browser includes a fun built-in game where you must move to avoid incoming 
 ![Game Screenshot](gameImage.png)
 
 # How to Use
-Demo link alternative, just click run and wait for it to load (images do not work): https://codehs.com/sandbox/yellowotter2314/browser/run
-To run the software:
+To run the software you have 3 options:
+First option, in-browser demo (images do not work): 
+1. Go to link https://codehs.com/sandbox/yellowotter2314/browser/run
+2. Click run and wait for it to load
+Second option, download executable:
 1. Download the ZIP file in the release section
 2. There should be 2 files, one is the SkiaSharp library (.dll), and the other is the runnable file (.exe)
 3. Run the the .exe file
-Alternatively:
-1. On the github page, click the green button that says "<> Code" 
+Third option, compile from source:
+1. On the github page, click the green button that says "<> Code"
 2. Download ZIP
 3. Compile the code yourself
 
