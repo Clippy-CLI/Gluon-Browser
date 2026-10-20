@@ -1,6 +1,6 @@
 # Gluon-Browser
 A simple, lightweight, fast, and secure browser that runs from the command line! 
-Demo link: (DEMO LINK HERE)
+Demo link (No Images): https://codehs.com/sandbox/yellowotter2314/browser/run
 ![GIF Of Browser Working](browserworking.gif)
 
 # About/Features
@@ -11,7 +11,7 @@ This browser includes a fun built-in game where you must move to avoid incoming 
 ![Game Screenshot](gameImage.png)
 
 # How to Use
-Demo link alternative: (DEMO LINK HERE)
+Demo link alternative, just click run and wait for it to load (images do not work): https://codehs.com/sandbox/yellowotter2314/browser/run
 To run the software:
 1. Download the ZIP file in the release section
 2. There should be 2 files, one is the SkiaSharp library (.dll), and the other is the runnable file (.exe)
