@@ -12,7 +12,7 @@ This browser includes a fun built-in game where you must move to avoid incoming 
 
 # How to Use
 To run the software you have 3 options:  
-First option, in-browser demo (images do not work):   
+First option, in-browser demo (best if you have issues running or don't want to download, note that images do not work):   
 1: Go to link https://codehs.com/sandbox/yellowotter2314/browser/run  
 2: Click run and wait for it to load  
 Second option, download executable:  
