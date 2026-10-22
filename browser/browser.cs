@@ -288,6 +288,7 @@ public class MyProgram {
 
             storeInput = (input);
             if (!handled) {
+                handled = true;
                 try {
                     var getter = new GetData(input, "");
                     string result = await getter.GetDataFromSiteAsync();
