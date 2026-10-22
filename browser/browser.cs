@@ -57,10 +57,10 @@ public class MyProgram {
                 Console.WriteLine("");
             }
 
-            if (input.StartsWith("links", StringComparison.OrdinalIgnoreCase)) {
+            if (input.StartsWith("link", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 try {
-                    string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
+                    string urlPart = input.Length > 5 ? input.Substring(5).Trim() : string.Empty;
                     var getter = new GetLinks(urlPart, "");
                     string result = await getter.GetLinksFromSiteAsync();
 
