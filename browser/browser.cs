@@ -305,6 +305,8 @@ public class MyProgram {
             storeInput = (input);
             if (!handled) {
                 handled = true;
+
+                if (input.Substring(0,8).Equals("https://") || input.Substring(0,7).Equals("http://")) {
                 try {
                     var getter = new GetData(input, "");
                     string result = await getter.GetDataFromSiteAsync();
@@ -322,6 +324,22 @@ public class MyProgram {
                 }
                 catch (Exception e) {
                     Console.WriteLine("Error: " + e.Message);
+                }
+                } else {
+                    //SEARCH FUNCTION GOES HERE
+
+
+
+
+
+
+
+
+
+
+
+
+
                 }
             }
         }
