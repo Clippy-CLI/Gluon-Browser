@@ -1,9 +1,6 @@
-# .NET build output
 **/bin/
 **/obj/
 **/.publish/
-
-# Visual Studio user-specific files
 .vs/
 *.suo
 *.user
