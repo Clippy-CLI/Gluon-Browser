@@ -37,10 +37,12 @@ public class MyProgram {
             }
 
             if (input.Equals("exit", StringComparison.OrdinalIgnoreCase)) {
+                handled = true;
                 break;
             }
 
             if (input.Equals("previous")) {
+                handled = true;
                 input = storeInput;
             }
 
@@ -55,7 +57,7 @@ public class MyProgram {
                 Console.WriteLine("");
             }
 
-            if (input.StartsWith("linkscan", StringComparison.OrdinalIgnoreCase)) {
+            if (input.StartsWith("links", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 try {
                     string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
@@ -273,7 +275,7 @@ public class MyProgram {
                 Console.WriteLine("exit - Closes the program");
                 Console.WriteLine("previous - Runs the previous command/url");
                 Console.WriteLine("common - Shows a list of common sites");
-                Console.WriteLine("linkscan + (url) - Shows available links on the webpage");
+                Console.WriteLine("links + (url) - Shows available links on the webpage");
                 Console.WriteLine("tab - opens previous input as a tab");
                 Console.WriteLine("tabs - Shows a list of open tabs");
                 Console.WriteLine("images + (url) - displays images from site as ascii");
@@ -307,7 +309,7 @@ public class MyProgram {
             }
         }
 
-        Console.WriteLine("Closed");
+        Console.WriteLine("Closing...");
     }
 }
 
