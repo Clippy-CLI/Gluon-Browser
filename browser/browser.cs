@@ -182,7 +182,7 @@ public class MyProgram {
                             p.changeY(-1);
                         }
                     }
-                    int doesSpawnWall = Random.Shared.Next(60);
+                    int doesSpawnWall = Random.Shared.Next(30);
                     if (doesSpawnWall == 0) {
                         Wall idkWallName = new Wall();
                         counterWalls++;
