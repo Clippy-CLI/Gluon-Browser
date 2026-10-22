@@ -46,6 +46,7 @@ public class MyProgram {
                 input = storeInput;
             }
 
+
             if (input.Equals("common")) {
                 handled = true;
                 Console.WriteLine("Common Webpages:");
@@ -75,6 +76,20 @@ public class MyProgram {
                     Console.WriteLine("Error: " + e.Message);
                 }
             }
+
+            if (input.StartsWith("download", StringComparison.OrdinalIgnoreCase)) {
+                handled = true;
+                try {
+                    string urlPart = input.Length > 9 ? input.Substring(9).Trim() : string.Empty;
+                    var getter = new GetFile(urlPart, "");
+                    await getter.GetFileFromSiteAsync();
+                    Console.WriteLine("File saved");
+                }
+                catch (Exception e) {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+            }
+
             if (input.StartsWith("images", StringComparison.OrdinalIgnoreCase)) {
                 handled = true;
                 try {
@@ -284,6 +299,7 @@ public class MyProgram {
                 Console.WriteLine("game - a small, fun, offline game");
                 Console.WriteLine("savepage + (url) - saves the page as a text file");
                 Console.WriteLine("readfile + (file) - reads a specified txt file");
+                Console.WriteLine("download + (url) - downloads file from URL");
             }
 
             storeInput = (input);
@@ -730,6 +746,42 @@ public class GetImage {
         string decoded = asciiBuilder.ToString();
         Console.WriteLine(decoded);
         return decoded;
+    }
+}
+
+public class GetFile {
+    private readonly string chooseURL;
+    private readonly string recievePart;
+
+    public GetFile(string pickURL, string parameter) {
+        chooseURL = pickURL;
+        recievePart = parameter;
+    }
+
+    public async Task GetFileFromSiteAsync() {
+        using var fileClient = new HttpClient();
+        fileClient.DefaultRequestHeaders.UserAgent.ParseAdd("Gluon-Browser");
+        fileClient.DefaultRequestHeaders.Accept.ParseAdd("image/*");
+        fileClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.9");
+        
+        try {
+        using Stream downloadStream = await fileClient.GetStreamAsync(chooseURL);
+        string fileName = string.IsNullOrWhiteSpace(recievePart)
+                ? Path.GetFileName(new Uri(chooseURL).AbsolutePath)
+                : recievePart;
+
+            if (string.IsNullOrWhiteSpace(fileName))
+                fileName = "downloaded_file";
+
+            string savePath = Path.Combine(
+                Environment.CurrentDirectory,
+                Path.GetFileName(fileName)
+        );
+        using FileStream fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None);
+        await downloadStream.CopyToAsync(fileStream);
+        } catch {
+            Console.WriteLine("Failed to save file");
+        }
     }
 }
 
