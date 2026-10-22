@@ -771,7 +771,7 @@ public class GetFile {
                 : recievePart;
 
             if (string.IsNullOrWhiteSpace(fileName))
-                fileName = "downloaded_file";
+                fileName = "download";
 
             string savePath = Path.Combine(
                 Environment.CurrentDirectory,
