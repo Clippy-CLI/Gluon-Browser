@@ -505,26 +505,38 @@ public class GetSearch {
         //link as the one below, so we can just use this one, then a big div with the website preview containing
         //like the actual page which we dont need, then an a tag with all of the preview in <br> tags
         while (true) {
-            int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
-            if (start == -1) break;
 
-            work = work.Substring(start);
-            int gt = work.IndexOf('>');
-            if (gt == -1) break;
 
-            work = work.Substring(gt + 1);
-            int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
-            if (endP == -1) {
-                recievedNew.Append(work);
-                break;
-            }
 
-            recievedNew.Append(work.Substring(0, endP));
 
-            int endPtag = work.IndexOf('>', endP);
-            if (endPtag == -1) break;
 
-            work = work.Substring(endPtag + 1);
+
+
+
+
+
+
+            //i dont quite want to delete this yet but i dont need it at all
+            // int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
+            // if (start == -1) break;
+
+            // work = work.Substring(start);
+            // int gt = work.IndexOf('>');
+            // if (gt == -1) break;
+
+            // work = work.Substring(gt + 1);
+            // int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
+            // if (endP == -1) {
+            //     recievedNew.Append(work);
+            //     break;
+            // }
+
+            // recievedNew.Append(work.Substring(0, endP));
+
+            // int endPtag = work.IndexOf('>', endP);
+            // if (endPtag == -1) break;
+
+            // work = work.Substring(endPtag + 1);
         }
 
         String formattedURLS = ("");
