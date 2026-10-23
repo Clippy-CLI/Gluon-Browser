@@ -451,6 +451,7 @@ public class GetData {
 public class GetSearch {
     private readonly string searchQuery;
     private readonly string recievePart;
+    public static List<String> URLS = new List<String>();
 
     public GetSearch(string query, string parameter) {
         searchQuery = query;
@@ -522,7 +523,39 @@ public class GetSearch {
             work = work.Substring(endPtag + 1);
         }
 
-        return work;
+        String formattedURLS = ("");
+
+        //after the parser, we have some raw html. Take this html and format it into the URLS list of objects
+        //SearchResult, then format it to string (such as line breaks between each result)
+
+        return formattedURLS;
+    }
+}
+
+public class SearchResult {
+    private String siteName;
+    private String siteURL;
+    private String sitePage;
+    private String sitePreview;
+
+    public SearchResult (String name, String url, String page, String preview) {
+        siteName = name;
+        siteURL = url;
+        sitePage = page;
+        sitePreview = preview;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
+    public String getSiteURL() {
+        return siteURL;
+    }
+    public String getSitePage() {
+        return sitePage;
+    }
+    public String getSitePreview() {
+        return sitePreview;
     }
 }
 
