@@ -500,6 +500,10 @@ public class GetSearch {
         string work = recievedData;
 
         //new parser for search engine
+        //some notes from inspecting html: there is a very convenient comment that says  
+        // <!-- This is the visible part --> after which there is an h2 that also contains a link and it is the same
+        //link as the one below, so we can just use this one, then a big div with the website preview containing
+        //like the actual page which we dont need, then an a tag with all of the preview in <br> tags
         while (true) {
             int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
             if (start == -1) break;
@@ -535,13 +539,11 @@ public class GetSearch {
 public class SearchResult {
     private String siteName;
     private String siteURL;
-    private String sitePage;
     private String sitePreview;
 
-    public SearchResult (String name, String url, String page, String preview) {
+    public SearchResult (String name, String url, String preview) {
         siteName = name;
         siteURL = url;
-        sitePage = page;
         sitePreview = preview;
     }
 
@@ -550,9 +552,6 @@ public class SearchResult {
     }
     public String getSiteURL() {
         return siteURL;
-    }
-    public String getSitePage() {
-        return sitePage;
     }
     public String getSitePreview() {
         return sitePreview;
