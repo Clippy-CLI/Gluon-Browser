@@ -328,18 +328,23 @@ public class MyProgram {
                 } else {
                     //SEARCH FUNCTION GOES HERE
 
+                        try {
+                            var getter = new GetData(input, "");
+                            string result = await getter.GetDataFromSiteAsync();
 
-
-
-
-
-
-
-
-
-
-
-
+                            if (string.IsNullOrWhiteSpace(result)) {
+                                Console.WriteLine("(no readable <p> content found)");
+                            }
+                            else {
+                                var lines = Regex.Split(result, "\r?\n");
+                                foreach (var line in lines) {
+                                    var t = line.Trim();
+                                    if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
+                                }
+                            }
+                        } catch (Exception e) {
+                        Console.WriteLine("Error: " + e.Message);
+                        }
                 }
             }
         }
@@ -440,6 +445,84 @@ public class GetData {
         decoded = Regex.Replace(decoded, "\\s+", " ").Trim();
 
         return decoded;
+    }
+}
+
+public class GetSearch {
+    private readonly string searchQuery;
+    private readonly string recievePart;
+
+    public GetSearch(string query, string parameter) {
+        searchQuery = query;
+        recievePart = parameter;
+    }
+
+    public async Task<string> GetSearchFromSiteAsync() {
+        string recievedData = string.Empty;
+
+        try {
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
+            client.DefaultRequestHeaders.Add("Accept", "text/html");
+            client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            string url = $"https://html.duckduckgo.com/html/?q={Uri.EscapeDataString(searchQuery)}";
+            var response = await client.GetAsync(url);
+
+            recievedData = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode) {
+                if ((int)response.StatusCode == 403) {
+                    return "Http 403, request rejected (Error Detected as bot/blocked traffic";
+                }
+
+                if (string.IsNullOrEmpty(recievedData)) {
+                    return "Error loading website (Error No Content Recieved From Site)";
+                }
+
+                return "An error has occured, check the URL and try again (Error Site not found";
+            }
+        } catch (Exception e) {
+            Console.WriteLine("Looks bad: " + e);
+            var eString = e.ToString();
+            if (eString.IndexOf("403", StringComparison.OrdinalIgnoreCase) != -1) {
+                return "Http 403, request rejected (Error Code: yg7f63g)";
+            }
+            else if (string.IsNullOrEmpty(recievedData)) {
+                return "Error loading website (Error Code: d3y7g3)";
+            }
+            else {
+                return "An error has occured, check the URL and try again (Error Code: v7d332)";
+            }
+        }
+        var recievedNew = new StringBuilder();
+        string work = recievedData;
+
+        //new parser for search engine
+        while (true) {
+            int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
+            if (start == -1) break;
+
+            work = work.Substring(start);
+            int gt = work.IndexOf('>');
+            if (gt == -1) break;
+
+            work = work.Substring(gt + 1);
+            int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
+            if (endP == -1) {
+                recievedNew.Append(work);
+                break;
+            }
+
+            recievedNew.Append(work.Substring(0, endP));
+
+            int endPtag = work.IndexOf('>', endP);
+            if (endPtag == -1) break;
+
+            work = work.Substring(endPtag + 1);
+        }
+
+        return work;
     }
 }
 
