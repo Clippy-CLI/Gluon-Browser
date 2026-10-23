@@ -329,13 +329,14 @@ public class MyProgram {
                     //SEARCH FUNCTION GOES HERE
 
                         try {
-                            var getter = new GetData(input, "");
-                            string result = await getter.GetDataFromSiteAsync();
+                            var getter = new GetSearch(input, "");
+                            string result = await getter.GetSearchFromSiteAsync();
 
                             if (string.IsNullOrWhiteSpace(result)) {
                                 Console.WriteLine("(no readable <p> content found)");
                             }
                             else {
+                                //I still don't know where this came from in the conversion thing
                                 var lines = Regex.Split(result, "\r?\n");
                                 foreach (var line in lines) {
                                     var t = line.Trim();
