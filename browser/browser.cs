@@ -523,6 +523,10 @@ public class GetSearch {
             work.Substring(work.IndexOf(">") + 1);
             String saidPreview = work.Substring(0, work.IndexOf("</a"));
             //now everything is nice and formatted into these strings but first remove <b> from saidPreview
+            saidPreview = saidPreview.Replace("<b>", "");
+            saidPreview = saidPreview.Replace("</b>", "");
+            //ok now we have everything into nice little strings
+            formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n");
 
             } else {
                 break;
