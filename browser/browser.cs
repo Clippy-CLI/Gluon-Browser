@@ -307,7 +307,6 @@ public class MyProgram {
             storeInput = (input);
             if (!handled) {
                 handled = true;
-
                 if ((input.Length > 8 ) && (input.Substring(0,8).Equals("https://") || input.Substring(0,7).Equals("http://"))) {
                 try {
                     var getter = new GetData(input, "");
