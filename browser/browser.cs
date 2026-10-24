@@ -505,47 +505,33 @@ public class GetSearch {
         // <!--This is the visible part--> after which there is an h2 that also contains a link and it is the same
         //link as the one below, so we can just use this one, then a big div with the website preview containing
         //like the actual page which we dont need, then an a tag with all of the preview in <br> tags
+        String formattedURLS = ("");
         while (true) {
             if (work.IndexOf("<!--This is the visible part-->") != -1) {
             work.Substring(work.IndexOf("<!--This is the visible part-->"));
             String linkAndTitle = work.Substring(work.IndexOf("<a"), work.IndexOf("</a>"));
-
-
-
-
-
-
+            String saidTitle = linkAndTitle.Substring((linkAndTitle.IndexOf(">") + 1),(linkAndTitle.IndexOf("<")));
+            linkAndTitle.Substring(linkAndTitle.IndexOf("href"));
+            linkAndTitle.Substring(linkAndTitle.IndexOf("\"") + 1);
+            linkAndTitle.Substring(0, linkAndTitle.IndexOf("\""));
+            String saidURL = linkAndTitle;
+            //now we have title and url. just need to get preview next
+            //ok there is a div, then an a. so work substrings at a
+            work.Substring(work.IndexOf("<a"));
+            //ok from here everything between thsoe a tags is the preview, just ignoring the <b> for bolding the
+            //search query but that is easy to remove
+            work.Substring(work.IndexOf(">") + 1);
+            String saidPreview = work.Substring(0, work.IndexOf("</a"));
+            //now everything is nice and formatted into these strings but first remove <b> from saidPreview
 
             } else {
                 break;
             }
-            //i dont quite want to delete this yet but i dont need it at all
-            // int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
-            // if (start == -1) break;
-
-            // work = work.Substring(start);
-            // int gt = work.IndexOf('>');
-            // if (gt == -1) break;
-
-            // work = work.Substring(gt + 1);
-            // int endP = work.IndexOf("</p", StringComparison.OrdinalIgnoreCase);
-            // if (endP == -1) {
-            //     recievedNew.Append(work);
-            //     break;
-            // }
-
-            // recievedNew.Append(work.Substring(0, endP));
-
-            // int endPtag = work.IndexOf('>', endP);
-            // if (endPtag == -1) break;
-
-            // work = work.Substring(endPtag + 1);
         }
 
-        String formattedURLS = ("");
+        
 
-        //after the parser, we have some raw html. Take this html and format it into the URLS list of objects
-        //SearchResult, then format it to string (such as line breaks between each result)
+        //after the parser, we have some raw links titles, previews, etc, just format here
 
         return formattedURLS;
     }
