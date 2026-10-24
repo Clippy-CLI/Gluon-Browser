@@ -506,13 +506,13 @@ public class GetSearch {
             linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("href"));
             linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("\"") + 1);
             linkAndTitle = linkAndTitle.Substring(0, linkAndTitle.IndexOf("\""));
-            String saidURL = linkAndTitle;
+            string saidURL = linkAndTitle;
+
             work = work.Substring(work.IndexOf("<a"));
             work = work.Substring(work.IndexOf(">") + 1);
             String saidPreview = work.Substring(0, work.IndexOf("</a"));
             saidPreview = saidPreview.Replace("<b>", "");
             saidPreview = saidPreview.Replace("</b>", "");
-            Console.WriteLine(saidTitle);
             formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n");
             } else {
                 break;
