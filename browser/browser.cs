@@ -500,7 +500,6 @@ public class GetSearch {
             if (work.IndexOf("links_main links_deep result__body") != -1) {
             work = work.Substring(work.IndexOf("links_main links_deep result__body"));
             String linkAndTitle = work.Substring(work.IndexOf("<a"), work.IndexOf("</a>"));
-            
             int startTitle = linkAndTitle.IndexOf(">") + 1;
             int endTitle = linkAndTitle.IndexOf("<", startTitle);
             String saidTitle = linkAndTitle.Substring(startTitle, endTitle - startTitle);
