@@ -460,6 +460,7 @@ public class GetSearch {
         string recievedData = string.Empty;
 
         try {
+            
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
