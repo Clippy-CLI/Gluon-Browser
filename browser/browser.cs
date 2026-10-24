@@ -552,7 +552,7 @@ public class GetSearch {
                         var parts = param.Split('=', 2);
 
                         if (parts.Length == 2 && parts[0] == "uddg") {
-                            return Uri.UnescapeDataString(parts[1]);
+                            saidURL = Uri.UnescapeDataString(parts[1]);
                         }
                     }
             // String saidPreview = work.Substring(0, work.IndexOf("</a"));
