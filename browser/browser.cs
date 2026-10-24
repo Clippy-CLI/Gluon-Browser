@@ -517,7 +517,7 @@ public class GetSearch {
             saidPreview = saidPreview.Replace("</b>", "");
             //formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n" + "\n");
             //temporary debug version, no preview as preview will be fixed later
-            formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + "\n" + "\n" + "\n");
+            formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n");
 
             } else {
                 break;
