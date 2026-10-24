@@ -499,17 +499,22 @@ public class GetSearch {
         while (true) {
             if (work.IndexOf("links_main links_deep result__body") != -1) {
             work = work.Substring(work.IndexOf("links_main links_deep result__body"));
-            String linkAndTitle = work.Substring(work.IndexOf("<a"), work.IndexOf("</a>"));
-            int startTitle = linkAndTitle.IndexOf(">") + 1;
-            int endTitle = linkAndTitle.IndexOf("<", startTitle);
-            String saidTitle = linkAndTitle.Substring(startTitle, endTitle - startTitle);
+            String linkAndTitle = work.Substring(work.IndexOf("<a"));
+
             linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("href"));
             linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("\"") + 1);
             linkAndTitle = linkAndTitle.Substring(0, linkAndTitle.IndexOf("\""));
             string saidURL = linkAndTitle;
 
+            
+            int startTitle = linkAndTitle.IndexOf(">") + 1;
+            int endTitle = linkAndTitle.IndexOf("<", startTitle);
+            String saidTitle = linkAndTitle.Substring(startTitle, endTitle - startTitle);
+            
+            
             work = work.Substring(work.IndexOf("<a"));
             work = work.Substring(work.IndexOf(">") + 1);
+
             String saidPreview = work.Substring(0, work.IndexOf("</a"));
             saidPreview = saidPreview.Replace("<b>", "");
             saidPreview = saidPreview.Replace("</b>", "");
