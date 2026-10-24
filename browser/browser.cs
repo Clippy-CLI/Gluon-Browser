@@ -452,7 +452,7 @@ public class GetData {
 public class GetSearch {
     private readonly string searchQuery;
     private readonly string recievePart;
-    public static List<String> URLS = new List<String>();
+    //public static List<String> URLS = new List<String>();
 
     public GetSearch(string query, string parameter) {
         searchQuery = query;
@@ -502,10 +502,13 @@ public class GetSearch {
 
         //new parser for search engine
         //some notes from inspecting html: there is a very convenient comment that says  
-        // <!-- This is the visible part --> after which there is an h2 that also contains a link and it is the same
+        // <!--This is the visible part--> after which there is an h2 that also contains a link and it is the same
         //link as the one below, so we can just use this one, then a big div with the website preview containing
         //like the actual page which we dont need, then an a tag with all of the preview in <br> tags
         while (true) {
+            if (work.IndexOf("<!--This is the visible part-->") != -1) {
+            work.Substring(work.IndexOf("<!--This is the visible part-->"));
+            String linkAndTitle = work.Substring(work.IndexOf("<a"), work.IndexOf("</a>"));
 
 
 
@@ -513,10 +516,9 @@ public class GetSearch {
 
 
 
-
-
-
-
+            } else {
+                break;
+            }
             //i dont quite want to delete this yet but i dont need it at all
             // int start = work.IndexOf("<p", StringComparison.OrdinalIgnoreCase);
             // if (start == -1) break;
@@ -546,28 +548,6 @@ public class GetSearch {
         //SearchResult, then format it to string (such as line breaks between each result)
 
         return formattedURLS;
-    }
-}
-
-public class SearchResult {
-    private String siteName;
-    private String siteURL;
-    private String sitePreview;
-
-    public SearchResult (String name, String url, String preview) {
-        siteName = name;
-        siteURL = url;
-        sitePreview = preview;
-    }
-
-    public String getSiteName() {
-        return siteName;
-    }
-    public String getSiteURL() {
-        return siteURL;
-    }
-    public String getSitePreview() {
-        return sitePreview;
     }
 }
 
