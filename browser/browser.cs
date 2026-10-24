@@ -332,7 +332,13 @@ public class MyProgram {
                             string result = await getter.GetSearchFromSiteAsync();
 
                             if (string.IsNullOrWhiteSpace(result)) {
-                                Console.WriteLine("(no readable <p> content found)");
+                                Console.WriteLine("No results");
+                            }else {
+                                var lines = Regex.Split(result, "\r?\n");
+                                foreach (var line in lines) {
+                                    var t = line.Trim();
+                                    if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
+                                }
                             }
                         } catch (Exception e) {
                         Console.WriteLine("Error: " + e.Message);
