@@ -20,7 +20,6 @@ public class MyProgram {
         Console.WriteLine(" ##   \\ /   ## ");
         Console.WriteLine("  ##   O   ##  ");
         Console.WriteLine("    #######    ");
-        //tried to make ascii of a gluon
         Console.WriteLine("Welcome to Gluon browser!");
         Console.WriteLine("Type help for a list of commands");
         Console.WriteLine("Type exit to quit");
@@ -449,7 +448,6 @@ public class GetData {
 public class GetSearch {
     private readonly string searchQuery;
     private readonly string recievePart;
-    //public static List<String> URLS = new List<String>();
 
     public GetSearch(string query, string parameter) {
         searchQuery = query;
@@ -497,11 +495,6 @@ public class GetSearch {
         }
         var recievedNew = new StringBuilder();
         string work = recievedData;
-        //new parser for search engine
-        //some notes from inspecting html: there is a very convenient comment that says  
-        // <!--This is the visible part--> after which there is an h2 that also contains a link and it is the same
-        //link as the one below, so we can just use this one, then a big div with the website preview containing
-        //like the actual page which we dont need, then an a tag with all of the preview in <br> tags
         String formattedURLS = ("");
         while (true) {
             if (work.IndexOf("links_main links_deep result__body") != -1) {
@@ -515,27 +508,17 @@ public class GetSearch {
             linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("\"") + 1);
             linkAndTitle = linkAndTitle.Substring(0, linkAndTitle.IndexOf("\""));
             String saidURL = linkAndTitle;
-            //now we have title and url. just need to get preview next
-            //ok there is a div, then an a. so work substrings at a
             work = work.Substring(work.IndexOf("<a"));
-            //ok from here everything between thsoe a tags is the preview, just ignoring the <b> for bolding the
-            //search query but that is easy to remove
             work = work.Substring(work.IndexOf(">") + 1);
             String saidPreview = work.Substring(0, work.IndexOf("</a"));
-            //now everything is nice and formatted into these strings but first remove <b> from saidPreview
             saidPreview = saidPreview.Replace("<b>", "");
             saidPreview = saidPreview.Replace("</b>", "");
-            //ok now we have everything into nice little strings
             Console.WriteLine(saidTitle);
             formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n");
             } else {
                 break;
             }
         }
-
-        
-
-        //after the parser, we have some raw links titles, previews, etc, just format here
         return formattedURLS;
     }
 }
@@ -931,7 +914,6 @@ public class Wall {
     private static int score;
     private int y;
     private int direction;
-    //0 = up, 1 = right, 2, down, 3 left
     public void moveAllWalls() {
         foreach (Wall thisWall in Walls) {
             if (thisWall.direction == 0) {
