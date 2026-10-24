@@ -365,7 +365,7 @@ public class GetData {
 
         try {
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
             client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
@@ -460,9 +460,9 @@ public class GetSearch {
         string recievedData = string.Empty;
 
         try {
-            
+
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
             client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
@@ -552,7 +552,7 @@ public class GetLinks {
 
         try {
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
             client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
@@ -640,7 +640,7 @@ public class GetImageLinks {
 
         try {
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "Gluon-Browser");
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
             client.DefaultRequestHeaders.Add("Accept", "text/html");
             client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
