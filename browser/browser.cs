@@ -499,7 +499,6 @@ public class GetSearch {
         }
         var recievedNew = new StringBuilder();
         string work = recievedData;
-
         //new parser for search engine
         //some notes from inspecting html: there is a very convenient comment that says  
         // <!--This is the visible part--> after which there is an h2 that also contains a link and it is the same
