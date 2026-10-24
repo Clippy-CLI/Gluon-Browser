@@ -723,8 +723,6 @@ public class GetImageLinks {
             int endP = work.IndexOf("\"", StringComparison.OrdinalIgnoreCase);
 
             if (endP == -1) {
-
-
                 break;
             }
 
