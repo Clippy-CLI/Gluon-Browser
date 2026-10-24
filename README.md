@@ -1,6 +1,6 @@
 # Gluon-Browser
 A simple, lightweight, fast, and secure browser that runs from the command line! 
-Demo link (Currently v1.0.0, No Images): https://codehs.com/sandbox/yellowotter2314/browser/run
+Demo link (Currently v1.1.0, No Images): https://codehs.com/sandbox/yellowotter2314/browser/run
 ![GIF Of Browser Working](browserworking.gif)
 
 # About/Features
@@ -13,7 +13,7 @@ This browser includes a fun built-in game where you must move to avoid incoming 
 # How to Use
 To run the software you have 3 options:  
 First option, in-browser demo (best if you have issues running or don't want to download, note that images do not work):   
-1: Go to link (v1.0.0) https://codehs.com/sandbox/yellowotter2314/browser/run  
+1: Go to link (v1.1.0) https://codehs.com/sandbox/yellowotter2314/browser/run  
 2: Click run and wait for it to load  
 Second option, download executable:  
 1: Download the ZIP file in the release section  
