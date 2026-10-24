@@ -507,7 +507,10 @@ public class GetSearch {
             if (work.IndexOf("links_main links_deep result__body") != -1) {
             work = work.Substring(work.IndexOf("links_main links_deep result__body"));
             String linkAndTitle = work.Substring(work.IndexOf("<a"), work.IndexOf("</a>"));
-            String saidTitle = linkAndTitle.Substring((linkAndTitle.IndexOf(">") + 1),(linkAndTitle.IndexOf("<")));
+            
+            int startTitle = linkAndTitle.IndexOf(">") + 1;
+            int endTitle = linkAndTitle.IndexOf("<", startTitle);
+            String saidTitle = linkAndTitle.Substring(startTitle, endTitle - startTitle);
             linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("href"));
             linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("\"") + 1);
             linkAndTitle = linkAndTitle.Substring(0, linkAndTitle.IndexOf("\""));
@@ -523,6 +526,7 @@ public class GetSearch {
             saidPreview = saidPreview.Replace("<b>", "");
             saidPreview = saidPreview.Replace("</b>", "");
             //ok now we have everything into nice little strings
+            Console.WriteLine(saidTitle);
             formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n");
             } else {
                 break;
