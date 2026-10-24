@@ -511,7 +511,23 @@ public class GetSearch {
             string saidURL = linkAndTitle;
             work = work.Substring(work.IndexOf("<a"));
             work = work.Substring(work.IndexOf(">") + 1);
+            
+                    saidURL = saidURL.Replace("&amp;", "&");
 
+                    if (saidURL.StartsWith("//"))
+                        saidURL = "https:" + saidURL;
+
+                    var uri = new Uri(saidURL);
+
+                    var query = uri.Query.TrimStart('?').Split('&');
+
+                    foreach (var param in query) {
+                        var parts = param.Split('=', 2);
+
+                        if (parts.Length == 2 && parts[0] == "uddg") {
+                            return Uri.UnescapeDataString(parts[1]);
+                        }
+                    }
             // String saidPreview = work.Substring(0, work.IndexOf("</a"));
             // saidPreview = saidPreview.Replace("<b>", "");
             // saidPreview = saidPreview.Replace("</b>", "");
