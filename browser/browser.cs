@@ -332,11 +332,13 @@ public class MyProgram {
 
                             if (string.IsNullOrWhiteSpace(result)) {
                                 Console.WriteLine("No results");
-                            }else {
+                            } else {
                                 var lines = Regex.Split(result, "\r?\n");
                                 foreach (var line in lines) {
                                     var t = line.Trim();
-                                    if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
+                                if (!string.IsNullOrEmpty(t)) {
+                                    Console.WriteLine(t);
+                                }
                                 }
                             }
                         } catch (Exception e) {
@@ -555,11 +557,6 @@ public class GetSearch {
                             saidURL = Uri.UnescapeDataString(parts[1]);
                         }
                     }
-            // String saidPreview = work.Substring(0, work.IndexOf("</a"));
-            // saidPreview = saidPreview.Replace("<b>", "");
-            // saidPreview = saidPreview.Replace("</b>", "");
-            //formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n" + "\n");
-            //temporary debug version, no preview as preview will be fixed later
             formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n");
 
             } else {
