@@ -505,26 +505,25 @@ public class GetSearch {
         String formattedURLS = ("");
         while (true) {
             if (work.IndexOf("links_main links_deep result__body") != -1) {
-            work.Substring(work.IndexOf("links_main links_deep result__body"));
+            work = work.Substring(work.IndexOf("links_main links_deep result__body"));
             String linkAndTitle = work.Substring(work.IndexOf("<a"), work.IndexOf("</a>"));
             String saidTitle = linkAndTitle.Substring((linkAndTitle.IndexOf(">") + 1),(linkAndTitle.IndexOf("<")));
-            linkAndTitle.Substring(linkAndTitle.IndexOf("href"));
-            linkAndTitle.Substring(linkAndTitle.IndexOf("\"") + 1);
-            linkAndTitle.Substring(0, linkAndTitle.IndexOf("\""));
+            linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("href"));
+            linkAndTitle = linkAndTitle.Substring(linkAndTitle.IndexOf("\"") + 1);
+            linkAndTitle = linkAndTitle.Substring(0, linkAndTitle.IndexOf("\""));
             String saidURL = linkAndTitle;
             //now we have title and url. just need to get preview next
             //ok there is a div, then an a. so work substrings at a
-            work.Substring(work.IndexOf("<a"));
+            work = work.Substring(work.IndexOf("<a"));
             //ok from here everything between thsoe a tags is the preview, just ignoring the <b> for bolding the
             //search query but that is easy to remove
-            work.Substring(work.IndexOf(">") + 1);
+            work = work.Substring(work.IndexOf(">") + 1);
             String saidPreview = work.Substring(0, work.IndexOf("</a"));
             //now everything is nice and formatted into these strings but first remove <b> from saidPreview
             saidPreview = saidPreview.Replace("<b>", "");
             saidPreview = saidPreview.Replace("</b>", "");
             //ok now we have everything into nice little strings
             formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n");
-
             } else {
                 break;
             }
