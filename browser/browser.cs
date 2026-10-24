@@ -503,8 +503,8 @@ public class GetSearch {
         //like the actual page which we dont need, then an a tag with all of the preview in <br> tags
         String formattedURLS = ("");
         while (true) {
-            if (work.IndexOf("<!--This is the visible part-->") != -1) {
-            work.Substring(work.IndexOf("<!--This is the visible part-->"));
+            if (work.IndexOf("links_main links_deep result__body") != -1) {
+            work.Substring(work.IndexOf("links_main links_deep result__body"));
             String linkAndTitle = work.Substring(work.IndexOf("<a"), work.IndexOf("</a>"));
             String saidTitle = linkAndTitle.Substring((linkAndTitle.IndexOf(">") + 1),(linkAndTitle.IndexOf("<")));
             linkAndTitle.Substring(linkAndTitle.IndexOf("href"));
@@ -532,7 +532,6 @@ public class GetSearch {
         
 
         //after the parser, we have some raw links titles, previews, etc, just format here
-
         return formattedURLS;
     }
 }
