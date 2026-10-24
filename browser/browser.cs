@@ -513,7 +513,10 @@ public class GetSearch {
             String saidPreview = work.Substring(0, work.IndexOf("</a"));
             saidPreview = saidPreview.Replace("<b>", "");
             saidPreview = saidPreview.Replace("</b>", "");
-            formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n");
+            //formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + saidPreview + "\n" + "\n" + "\n");
+            //temporary debug version, no preview as preview will be fixed later
+            formattedURLS = (formattedURLS + saidTitle + "\n" + saidURL + "\n" + "\n" + "\n" + "\n");
+
             } else {
                 break;
             }
