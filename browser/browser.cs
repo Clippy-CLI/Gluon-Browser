@@ -300,13 +300,15 @@ public class MyProgram {
                 Console.WriteLine("savepage + (url) - saves the page as a text file");
                 Console.WriteLine("readfile + (file) - reads a specified txt file");
                 Console.WriteLine("download + (url) - downloads file from URL");
+                Console.WriteLine("(url) - reads the page at specified url");
+                Console.WriteLine("Type a search term to search with duckduckgo!");
             }
 
             storeInput = (input);
             if (!handled) {
                 handled = true;
 
-                if (input.Substring(0,8).Equals("https://") || input.Substring(0,7).Equals("http://")) {
+                if ((input.Length > 8 ) && (input.Substring(0,8).Equals("https://") || input.Substring(0,7).Equals("http://"))) {
                 try {
                     var getter = new GetData(input, "");
                     string result = await getter.GetDataFromSiteAsync();
@@ -326,22 +328,12 @@ public class MyProgram {
                     Console.WriteLine("Error: " + e.Message);
                 }
                 } else {
-                    //SEARCH FUNCTION GOES HERE
-
                         try {
                             var getter = new GetSearch(input, "");
                             string result = await getter.GetSearchFromSiteAsync();
 
                             if (string.IsNullOrWhiteSpace(result)) {
                                 Console.WriteLine("(no readable <p> content found)");
-                            }
-                            else {
-                                //I still don't know where this came from in the conversion thing
-                                var lines = Regex.Split(result, "\r?\n");
-                                foreach (var line in lines) {
-                                    var t = line.Trim();
-                                    if (!string.IsNullOrEmpty(t)) Console.WriteLine(t);
-                                }
                             }
                         } catch (Exception e) {
                         Console.WriteLine("Error: " + e.Message);
