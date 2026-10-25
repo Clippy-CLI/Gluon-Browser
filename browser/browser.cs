@@ -12,7 +12,6 @@ using System.Collections.Generic;
 
 public class MyProgram {
     public static async Task Main(string[] args) {
-        Console.TreatControlCAsInput = true;
         Console.Clear();
         Console.WriteLine("    #######    ");
         Console.WriteLine("  ##       ##  ");
