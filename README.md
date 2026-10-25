@@ -33,3 +33,5 @@ This is licensed under the MIT License, 2026 by Clippy-CLI
 
 This software uses SkiaSharp, which is licensed under the MIT License.
 Much of this project was developed for the Hack Club (https://hackclub.com/) Stardance event (https://stardance.hackclub.com/)
+
+This program was originally made in Java, and the converter to convert it to C# was AI. AI was used only a little bit for debugging.
